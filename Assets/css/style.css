@@ -221,3 +221,89 @@ footer {
     color: #181818;
     font-size: 400;
 }
+
+
+footer {
+    background-color: var(--primary-color);
+    padding: 60px 20px 20px 20px;
+    color: white;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-column {
+    flex: 1;
+}
+
+.footer-logo {
+    width: 200px;
+    height: auto;
+}
+
+.footer-column h3 {
+    color: var(--secondary-color);
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.contact-info p,
+.social-links p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.contact-info img,
+.social-links img {
+    width: 20px;
+    height: 20px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom p {
+    color: white;
+    font-size: 14px;
+}
+
+.heart {
+    color: red;
+    margin: 0 5px;
+}
+
+.thepiolo {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-column {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contact-info p,
+    .social-links p {
+        justify-content: center;
+    }
+}
