@@ -45,7 +45,6 @@ body {
     color: #007bff;
 }
 
-
 .wrap-nav {
     display: flex;
     justify-content: space-between;
@@ -211,45 +210,15 @@ body {
     margin: 80px;
 }
 
-footer {
-    background-color: #181818;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    font-family: montserrat;
-    height: 50vh;
-    font-weight: 800;
-    font-size: 20px;
-    color: #5e5e5e;
-}
-
-.footext {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.madeby {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    width: 100%;
-    background-color: rgb(255, 255, 255);
-    align-self: center;
-    font-size: 14px;
-    color: #181818;
-    font-size: 400;
-}
-
-
+/* Footer Styles */
 footer {
     background-color: var(--primary-color);
     padding: 60px 20px 20px 20px;
     color: white;
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .footer-container {
@@ -257,58 +226,70 @@ footer {
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    gap: 40px;
+    gap: 80px;
     margin-bottom: 40px;
+    width: 100%;
 }
 
 .footer-column {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .footer-logo {
     width: 200px;
-    height: auto;
+    height: 200px;
+    object-fit: contain;
 }
 
 .footer-column h3 {
     color: var(--secondary-color);
     font-size: 24px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     font-weight: 500;
+    text-align: left;
+}
+
+.contact-info,
+.social-links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .contact-info p,
 .social-links p {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 15px;
+    gap: 15px;
+    margin: 0;
     color: white;
+    font-size: 16px;
 }
 
-.contact-info img,
-.social-links img {
+.icon {
     width: 20px;
     height: 20px;
+    object-fit: contain;
 }
 
 .footer-bottom {
     text-align: center;
     padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
 }
 
 .footer-bottom p {
     color: white;
     font-size: 14px;
+    margin: 0;
 }
 
-.heart {
-    color: red;
-    margin: 0 5px;
-}
-
-.thepiolo {
+.Autores {
     color: var(--secondary-color);
     text-decoration: none;
 }
@@ -316,20 +297,18 @@ footer {
 @media (max-width: 768px) {
     .footer-container {
         flex-direction: column;
-        text-align: center;
+        gap: 40px;
     }
 
     .footer-column {
         align-items: center;
-        display: flex;
-        flex-direction: column;
+        text-align: center;
     }
 
-    .contact-info p,
-    .social-links p {
-        justify-content: center;
+    .footer-column h3 {
+        text-align: center;
     }
-}
+
     .contact-info p,
     .social-links p {
         justify-content: center;
