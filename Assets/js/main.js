@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if(isScrolled>0){
             nav.classList.add("active", isScrolled);
             carousel.classList.add("active", isScrolled);
+            list.classList.add("active", isScrolled);
             logo.src = logotipoScroll;
             logo.style.height = "60px";
             logo.style.transform = "rotate(360deg)";
@@ -24,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
        else{
         nav.classList.remove("active", isScrolled);
         carousel.classList.remove("active", isScrolled);
+        list.classList.remove("active", isScrolled);
         logo.src = logotipoNormal;
         logo.style.height = "80px";
         logo.style.transform = "rotate(0deg)";
