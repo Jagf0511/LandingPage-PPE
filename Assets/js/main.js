@@ -1,3 +1,6 @@
+const abrir = document.querySelector(".abrir");
+const cerrar = document.querySelector(".cerrar");
+    const list = document.querySelector(".list-nav")
 document.addEventListener("DOMContentLoaded", function () {
     const nav = document.querySelector(".navigation");
     const logo = document.querySelector(".logo");
@@ -28,6 +31,18 @@ document.addEventListener("DOMContentLoaded", function () {
         
     });
 });
+
+abrir.addEventListener("click", function(){
+    abrir.classList.remove("visible");
+    cerrar.classList.add("visible");
+    list.classList.add("visible");
+});
+cerrar.addEventListener("click", function(){
+    abrir.classList.add("visible");
+    cerrar.classList.remove("visible");
+    list.classList.remove("visible");
+});
+
 window.onload = function () {
     const images = [
         "Assets/Imgs/photos/carrusel_1-min.jpg",

@@ -12,6 +12,7 @@
     text-decoration: none;
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -31,13 +32,6 @@ body {
     height: 80px;
     transition: ease-in-out 300ms;
 }
-
-.scrolled {
-    background-color: white;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 10px 20px;
-}
-
 .navigation a {
     text-decoration: none;
     color: black;
@@ -110,18 +104,18 @@ body {
     align-items: center;
     height: 100vh;
     width: 100%;
-    padding-top: 120px;
     transition: all 300ms ease-in-out;
 }
-.container-one.active{
-    padding-top: 80px;
-    transition: all 300ms ease-in-out;
-}
+
 
 /* Carousel Styles */
 .carousel{
     height: 100vh;
-    width: 100%;
+}
+.carousel img{
+    height: 100vh;
+    width: auto;
+    object-fit: cover;
 }
 .carousel-caption {
     background-color: rgba(0, 0, 0, 0.7);
@@ -133,9 +127,7 @@ body {
     transform: translateY(-50px);
 }
 
-.carousel-indicators {
-    bottom: 100px;
-}
+
 
 .carousel-caption h5 {
     font-weight: 600;
@@ -147,54 +139,6 @@ body {
     font-weight: 400;
     margin-bottom: 0;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-.carousel-control-prev,
-.carousel-control-next {
-    top: 40%;
-    transform: translateY(-50%);
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    padding: 25px;
-}
-
-.carousel-indicators button {
-    background-color: rgba(255, 255, 255, 0.7) !important;
-    height: 4px !important;
-    margin: 0 6px !important;
-}
-
-.carousel-indicators button.active {
-    background-color: var(--secondary-color) !important;
-}
-
-@media (max-width: 768px) {
-    .carousel-caption {
-        position: relative;
-        display: block !important;
-        background-color: var(--primary-color);
-        border-radius: 0;
-        max-width: 100%;
-        padding: 15px;
-        bottom: 0;
-        transform: none;
-    }
-
-    .carousel-indicators {
-        bottom: 20px;
-    }
-
-    .carousel-caption h5 {
-        font-size: 1.5rem !important;
-    }
-
-    .carousel-caption p {
-        font-size: 1rem !important;
-    }
 }
 
 .container-two{
@@ -215,24 +159,25 @@ body {
     height: 100%;
     width: 100%;
 }
-
-.container-three {
-    background-color: #181818;
-    border-radius: 100px;
+.container-three div{
+    padding: 0;
+    margin: 0;
+}
+.container-three img{
+   width: 100%;
+   transition: all 300ms ease-in-out;
+}
+.container-three img:hover{
+    transform: scale(1.04);
+    transition: all 300ms ease-in-out;
+ }
+ .gallery h2{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 100px;
-    font-size: 20px;
-    color: #ffffff;
-    box-shadow: 0px 0px 10px 2px #00000098;
-    transition: all 300ms ease-in-out;
-}
-
-.container-three:hover {
-    margin: 80px;
-}
+    width: 100%;
+    padding-bottom: 20px;
+ }
 
 /* Footer Styles */
 footer {
@@ -317,6 +262,120 @@ footer {
     color: var(--secondary-color);
     text-decoration: none;
 }
+.logowps{
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 100;
+    height: 70px;
+    width: 70px;
+    transition: all 300ms ease-in-out;
+}
+.logowps:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: all 300ms ease-in-out;
+}
+
+
+
+
+.scrolled {
+    background-color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+}
+.abrir {
+    display: none;
+    all: unset; /* Elimina todos los estilos (padding, margin, border, background, etc.) */
+    display: inline-block; /* Asegura que siga comportándose como un botón */
+    cursor: pointer; /* Mantiene el cursor de botón */
+  }
+  .cerrar {
+    display: none;
+    all: unset; /* Elimina todos los estilos (padding, margin, border, background, etc.) */
+    display: inline-block; /* Asegura que siga comportándose como un botón */
+    cursor: pointer; /* Mantiene el cursor de botón */
+  }
+  
+@media (max-width: 768px) {
+    .list-nav{
+        overflow: hidden;
+        visibility: hidden;
+        position: absolute;
+        top: 120px;
+        width: 100%;
+        height: 0px;
+        background-color: var(--primary-color);
+        flex-direction: column;
+        transition: all 300ms ease-in-out;
+    }
+    .list-nav.visible{
+        visibility: visible;
+        height: 200px;
+        transition: all 300ms ease-in-out;
+    }
+    .social-list{
+        gap: 1rem;
+        transition: all 300ms ease-in-out;
+    }
+    
+    .logo{
+        transition: all 300ms ease-in-out;
+    }
+    .navigation{
+        transition: all 300ms ease-in-out;
+    }
+    .abrir{
+        display: none;
+        height: 50px;
+        width: 50px;
+       
+    }
+    .abrir.visible{
+        display: block;
+        
+    }
+    .cerrar{
+        display: none;
+        height: 50px;
+        width: 50px;
+        
+    }
+    .cerrar.visible{
+        display: block;
+        
+    }
+   
+}
+
+
+@media (max-width: 768px) {
+    .carousel-caption {
+        position: relative;
+        display: block !important;
+        background-color: var(--primary-color);
+        border-radius: 0;
+        max-width: 100%;
+        padding: 15px;
+        bottom: 0;
+        transform: none;
+    }
+
+    .carousel-indicators {
+        bottom: 20px;
+    }
+
+    .carousel-caption h5 {
+        font-size: 1.5rem !important;
+    }
+
+    .carousel-caption p {
+        font-size: 1rem !important;
+    }
+}
+
+
 
 @media (max-width: 768px) {
     .footer-container {
@@ -338,17 +397,5 @@ footer {
         justify-content: center;
     }
 }
-.logowps{
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
-    z-index: 100;
-    height: 70px;
-    width: 70px;
-    transition: all 300ms ease-in-out;
-}
-.logowps:hover{
-    cursor: pointer;
-    transform: scale(1.1);
-    transition: all 300ms ease-in-out;
-}
+
+
