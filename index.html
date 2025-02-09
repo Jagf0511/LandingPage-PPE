@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="Assets/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -20,22 +20,25 @@
         <nav class="navigation">
             <div class="wrap-nav">
                 <div class="social-list">
-                    <a href="https://wa.me/573246281456"><img class="logo" src="Assets/Imgs/logos/wpp-03.svg" alt="WhatsApp"></a>
-                    <a href="https://www.facebook.com/profile.php?id=100089531658354"><img class="logo" src="Assets/Imgs/logos/facebook-04.svg" alt="Facebook"></a>
-                    <a href="https://www.instagram.com/transportservice_medellin/"><img class="logo" src="Assets/Imgs/logos/instagram-01.svg" alt="Instagram"></a>
+                    <a class="logowpp" target="_blank" href="https://wa.me/573246281456"><img src="Assets/Imgs/logos/wpp-03.svg" alt="WhatsApp"></a>
+                    <a class="fb" target="_blank" href="https://www.facebook.com/profile.php?id=100089531658354"><img src="Assets/Imgs/logos/facebook-04.svg" alt="Facebook"></a>
+                    <a class="ig" target="_blank" href="https://www.instagram.com/transportservice_medellin/"><img src="Assets/Imgs/logos/instagram-01.svg" alt="Instagram"></a>
                 </div>
-                <a class="logo"><img class="logo" src="Assets/Imgs/logos/logotipo_web.svg"
+                <a><img class="logo" src="Assets/Imgs/logos/logotipo_web.svg"
                         alt="Logotipo Transport Service Medellin"></a>
                 <div class="list-nav">
                     <a href="/index.html">Home</a>
                     <a href="/#">About us</a>
-                    <a href="https://drive.google.com/file/d/1MZFcI5pwCUe6oWQOEQRYkOdcMfsOj6dU/view?usp=sharing">Brochure</a>
+                    <a target="_blank" href="https://drive.google.com/file/d/1MZFcI5pwCUe6oWQOEQRYkOdcMfsOj6dU/view?usp=sharing">Brochure</a>
                 </div>
             </div>
         </nav>
     </header>
+        <a class="logowps" target="_blank" href="https://wa.me/573246281456"><img src="Assets/Imgs/logos/wpp-03.svg" alt="WhatsApp"></a>
+    
     <div class="container-one">
-        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        
+        <div id="carouselExample" class="carousel carousel-fade" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
@@ -51,7 +54,7 @@
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="Assets/Imgs/photos/carrusel_1-min.jpg" class="d-block w-100"
-                        style="height:auto; max-height:700px; object-fit: cover;" alt="Imagen 1">
+                        style="object-fit: cover;" alt="Imagen 1">
                     <div class="carousel-caption d-none d-md-block">
                         <h5 style="font-size: 2rem;">Explora lugares increíbles</h5>
                         <p style="font-size: 1.2rem;">Descubre destinos inolvidables en cada viaje.</p>
@@ -59,7 +62,7 @@
                 </div>
                 <div class="carousel-item">
                     <img src="Assets/Imgs/photos/carrusel_2-min.jpg" class="d-block w-100"
-                        style="height:auto; max-height:700px; object-fit: cover;" alt="Imagen 2">
+                        style=" object-fit: cover;" alt="Imagen 2">
                     <div class="carousel-caption d-none d-md-block">
                         <h5 style="font-size: 2rem;">Vive la aventura</h5>
                         <p style="font-size: 1.2rem;">Encuentra experiencias únicas en cada rincón.</p>
@@ -67,7 +70,7 @@
                 </div>
                 <div class="carousel-item">
                     <img src="Assets/Imgs/photos/carrusel_3-min.jpg" class="d-block w-100"
-                        style="height:auto; max-height:700px; object-fit: cover;" alt="Imagen 3">
+                        style="object-fit: cover;" alt="Imagen 3">
                     <div class="carousel-caption d-none d-md-block">
                         <h5 style="font-size: 2rem;">Descubre nuevos horizontes</h5>
                         <p style="font-size: 1.2rem;">Viajar es la mejor manera de aprender y crecer.</p>
@@ -75,7 +78,7 @@
                 </div>
                 <div class="carousel-item">
                     <img src="Assets/Imgs/photos/carrusel_4-min.jpg" class="d-block w-100"
-                        style="height:auto; max-height:700px; object-fit: cover;" alt="Imagen 4">
+                        style="object-fit: cover;" alt="Imagen 4">
                     <div class="carousel-caption d-none d-md-block">
                         <h5 style="font-size: 2rem;">Conéctate con la naturaleza</h5>
                         <p style="font-size: 1.2rem;">Los paisajes más hermosos te esperan.</p>
@@ -83,7 +86,7 @@
                 </div>
                 <div class="carousel-item">
                     <img src="Assets/Imgs/photos/carrusel_5-01.jpg" class="d-block w-100"
-                        style="height:auto; max-height:700px; object-fit: cover;" alt="Imagen 5">
+                        style="object-fit: cover;" alt="Imagen 5">
                     <div class="carousel-caption d-none d-md-block">
                         <h5 style="font-size: 2rem;">Tu próxima aventura comienza aquí</h5>
                         <p style="font-size: 1.2rem;">Planifica tu viaje y crea recuerdos inolvidables.</p>
@@ -103,6 +106,16 @@
 
     </div>
     <div class="container-two">
+        <div class="embebed">
+            <iframe 
+            src="https://www.youtube.com/embed/SkVafeiiUMI?autoplay=1&mute=1&controls=1&modestbranding=1&showinfo=0&rel=0"  
+            title="YouTube Short" 
+            frameborder="0" 
+            allow=" autoplay; encrypted-media;" 
+            allowfullscreen>
+            </iframe>
+        </div>
+
 
 
     </div>
@@ -139,8 +152,10 @@
         </footer>
 
     </footer>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="Assets/js/main.js"></script>
 </body>
 
 </html>
