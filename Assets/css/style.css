@@ -427,4 +427,53 @@ footer {
     }
 }
 
+.contact-form {
+    background: #1b1b1b;
+    padding: 30px;
+    margin: 40px auto;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(250, 246, 246, 0.1);
+    text-align: center;
+}
+
+.contact-form h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: #ffffff;
+}
+
+.contact-form label {
+    display: block;
+    text-align: left;
+    font-weight: bold;
+    margin: 10px 0 5px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: black; 
+    background-color: white;
+}
+
+.contact-form button {
+    background-color: #007bff;
+    color: rgb(255, 255, 255);
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.contact-form button:hover {
+    background-color: #0056b3;
+}
 
