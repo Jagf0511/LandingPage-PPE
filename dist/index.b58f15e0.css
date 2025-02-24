@@ -415,4 +415,53 @@ footer {
     justify-content: center;
   }
 }
+
+.contact-form {
+  text-align: center;
+  background: #1b1b1b;
+  border-radius: 8px;
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  box-shadow: 0 4px 10px #faf6f61a;
+}
+
+.contact-form h2 {
+  color: #fff;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.contact-form label {
+  text-align: left;
+  margin: 10px 0 5px;
+  font-weight: bold;
+  display: block;
+}
+
+.contact-form input, .contact-form textarea {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.contact-form button {
+  color: #fff;
+  cursor: pointer;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  font-size: 1rem;
+}
+
+.contact-form button:hover {
+  background-color: #0056b3;
+}
 /*# sourceMappingURL=index.b58f15e0.css.map */

@@ -1,3 +1,7 @@
+import "../css/style.scss";
+
+
+
 const abrir = document.querySelector(".abrir");
 const cerrar = document.querySelector(".cerrar");
 const list = document.querySelector(".list-nav");
