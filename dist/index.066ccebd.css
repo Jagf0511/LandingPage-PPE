@@ -1,6 +1,6 @@
 :root {
-  --primary-color: #b518e6;
-  --secondary-color: #ca480c;
+  --primary-color: #000000;
+  --secondary-color: #00ff88;
   --base: #fff;
 }
 
@@ -230,14 +230,16 @@ footer {
   font-weight: 500;
 }
 
-.contact-info, .social-links {
+.contact-info,
+.social-links {
   flex-direction: column;
   gap: 20px;
   width: 100%;
   display: flex;
 }
 
-.contact-info p, .social-links p {
+.contact-info p,
+.social-links p {
   color: #fff;
   align-items: center;
   gap: 15px;
@@ -292,7 +294,8 @@ footer {
   box-shadow: 0 4px 10px #0000001a;
 }
 
-.abrir, .cerrar {
+.abrir,
+.cerrar {
   cursor: pointer;
   background-color: var(--primary-color);
   border-radius: 200px;
@@ -324,7 +327,7 @@ footer {
   text-align: justify;
 }
 
-@media (width <= 768px) {
+@media (width <=768px) {
   .list-nav {
     visibility: hidden;
     background-color: var(--primary-color);
@@ -352,7 +355,8 @@ footer {
     transition: all .3s ease-in-out;
   }
 
-  .logo, .navigation {
+  .logo,
+  .navigation {
     transition: all .3s ease-in-out;
   }
 
@@ -411,7 +415,8 @@ footer {
     text-align: center;
   }
 
-  .contact-info p, .social-links p {
+  .contact-info p,
+  .social-links p {
     justify-content: center;
   }
 }
@@ -439,7 +444,8 @@ footer {
   display: block;
 }
 
-.contact-form input, .contact-form textarea {
+.contact-form input,
+.contact-form textarea {
   color: #000;
   background-color: #fff;
   border: 1px solid #000;
@@ -464,4 +470,5 @@ footer {
 .contact-form button:hover {
   background-color: #0056b3;
 }
+
 /*# sourceMappingURL=index.066ccebd.css.map */
