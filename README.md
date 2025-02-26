@@ -1,6 +1,12 @@
 # LandingPage Taller 2
 
-Breve descripción............
+**Transport Service Medellín** es una landing page que presenta los servicios de transporte en Medellín. La página incluye:  
+
+- 📸 Una galería de imágenes.  
+- 📄 Un brochure informativo.  
+- 📝 Un formulario de registro e inicio de sesión.  
+
+Esta plataforma ofrece una experiencia visual y accesible para conocer más sobre los servicios de transporte disponibles.  
 
 ## Instalación
 
