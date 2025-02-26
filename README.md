@@ -36,6 +36,17 @@ npm start
 
 Este proyecto utiliza Webpack para la configuración del bundle. La configuración principal se encuentra en `webpack.config.js`. Asegúrate de revisar y modificar este archivo si necesitas personalizar la configuración.
 
+## Configuracion del SASS
+
+Este proyecto utiliza SASS para la gestión de estilos, lo que permite escribir CSS de manera más estructurada y reutilizable. Sigue estos pasos para configurarlo correctamente:
+
+Instalación de SASS
+Si aún no tienes SASS instalado en el proyecto, ejecútalo con el siguiente comando:
+
+```bash
+npm install sass --save-dev
+```
+
 ## Referentes
 
 Aquí algunos recursos útiles sobre las tecnologías usadas en este proyecto:
