@@ -323,10 +323,7 @@ footer {
     
     text-align: justify;
   }
- .auth-container input {
-    font-weight: 600;
-    color: #181818; /* Rojo */
-}
+
 @media (max-width: 768px) {
     .list-nav{
         overflow: hidden;
@@ -479,5 +476,9 @@ footer {
 
 .contact-form button:hover {
     background-color: #0056b3;
+}
+ .auth-container input {
+    font-weight: 600;
+    color: #181818; /* Rojo */
 }
 
