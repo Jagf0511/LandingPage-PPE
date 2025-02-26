@@ -1,7 +1,5 @@
 import "../css/style.scss";
 
-
-
 const abrir = document.querySelector(".abrir");
 const cerrar = document.querySelector(".cerrar");
 const list = document.querySelector(".list-nav");
@@ -64,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     };
 
-    // Funcionalidad del formulario
+    // Funcionalidad del formulario de contacto
     form.addEventListener("submit", function (event) {
         event.preventDefault(); // Evita el envío 
 
@@ -79,5 +77,56 @@ document.addEventListener("DOMContentLoaded", function () {
 
         alert("¡Gracias por contactar con nosotros!\n " + nameValue + " Sera enviado nuestra respuesta al\nEmail: " + emailValue );
         form.reset(); // Limpia los campos después del envío
+    });
+
+    // Funcionalidad de registro
+    const registerForm = document.getElementById("register-form");
+    registerForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const email = document.getElementById("register-email").value.trim();
+        const password = document.getElementById("register-password").value.trim();
+
+        if (email === "" || password === "") {
+            alert("Por favor, complete todos los campos.");
+            return;
+        }
+
+        // Guardar usuario en localStorage
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+        const existingUser  = users.find(user => user.email === email);
+
+        if (existingUser ) {
+            alert("Este email ya está registrado.");
+        } else {
+            users.push({ email, password });
+            localStorage.setItem("users", JSON.stringify(users));
+            alert("Registro exitoso. Ahora puedes iniciar sesión.");
+            registerForm.reset();
+        }
+    });
+
+    //  inicio de sesión
+    const loginForm = document.getElementById("login-form");
+    loginForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const email = document.getElementById("login-email").value.trim();
+        const password = document.getElementById("login-password").value.trim();
+
+        if (email === "" || password === "") {
+            alert("Por favor, complete todos los campos.");
+            return;
+        }
+
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+        const user = users.find(user => user.email === email && user.password === password);
+
+        if (user) {
+            alert("Inicio de sesión exitoso. Bienvenido!");
+            
+        } else {
+            alert("Email o contraseña incorrectos.");
+        }
     });
 });
