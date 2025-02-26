@@ -36,6 +36,17 @@ npm start
 
 Este proyecto utiliza Webpack para la configuración del bundle. La configuración principal se encuentra en `webpack.config.js`. Asegúrate de revisar y modificar este archivo si necesitas personalizar la configuración.
 
+#Instalacion del Parcel
+Utiliza el siguiente comando para ejecutar el parcel como bundler
+```bash
+npx parcel index.html
+```
+El siguiente comando se utiliza para compilar los archivos del proyecto ejecutando:
+```bash
+npx parcel build Assets/js/main.js
+```
+
+
 ## Configuracion del SASS
 
 Este proyecto utiliza SASS para la gestión de estilos, lo que permite escribir CSS de manera más estructurada y reutilizable. Sigue estos pasos para configurarlo correctamente:
