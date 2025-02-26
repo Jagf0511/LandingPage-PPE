@@ -51,6 +51,37 @@
             color: var(--text-color);
             transition: all 0.3s ease;
         }
+
+        .auth-container {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .auth-container h2 {
+            margin-bottom: 15px;
+        }
+
+        .auth-container form {
+            margin-bottom: 15px;
+        }
+
+        .auth-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .auth-container input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        .auth-container button {
+            padding: 10px 15px;
+        }
         
         /* Dark mode toggle button */
         .theme-switch {
@@ -189,22 +220,19 @@
             allowfullscreen>
             </iframe>
         </div>
-
-
-
     </div>
+    
     <div class="aboutus"  style="background-size: cover;background-position: center;background-repeat: no-repeat; background-image: linear-gradient(to bottom, rgba(18, 18, 18, 1), rgba(18, 18, 18, 0.7)), url('Assets/Imgs/photos/aboutus.jpg')" id="about-us">
         <h2>About Us</h2>
         <p>
             En TransportService Medellín, nos especializamos en ofrecer soluciones de transporte seguras, eficientes y confiables en toda el área metropolitana de Medellín. Con años de experiencia en el sector, nos hemos consolidado como una empresa líder en movilidad, comprometida con la puntualidad, la comodidad y la satisfacción de nuestros clientes.
 
-Nuestro equipo de conductores profesionales y nuestra moderna flota de vehículos garantizan un servicio de alta calidad, adaptado a las necesidades de cada cliente. Ya sea para transporte empresarial, turístico o personal, en TransportService Medellín trabajamos con los más altos estándares de seguridad y servicio al cliente.
+            Nuestro equipo de conductores profesionales y nuestra moderna flota de vehículos garantizan un servicio de alta calidad, adaptado a las necesidades de cada cliente. Ya sea para transporte empresarial, turístico o personal, en TransportService Medellín trabajamos con los más altos estándares de seguridad y servicio al cliente.
 
-Confía en nosotros para llegar a tu destino de manera rápida y segura. Tu movilidad, nuestra prioridad.
-
-
+            Confía en nosotros para llegar a tu destino de manera rápida y segura. Tu movilidad, nuestra prioridad.
         </p>
     </div>
+    
     <div class="container gallery">
         <h2>Photos Gallery</h2>
         <div class="container-three row">
@@ -237,34 +265,61 @@ Confía en nosotros para llegar a tu destino de manera rápida y segura. Tu movi
             </div>
         </div>
     </div>
-    <footer>
-        <footer>
-            <div class="footer-container">
-                <div class="footer-column">
+    
+    <div class="auth-container">
+        <h2>Registro</h2>
+        <form id="register-form">
+            <label for="register-email">Email:</label>
+            <input type="email" id="register-email" required>
+            
+            <label for="register-password">Contraseña:</label>
+            <input type="password" id="register-password" required>
+            
+            <button type="submit">Registrar</button>
+        </form>
 
-                    <img src="Assets/Imgs/logos/iconweb.svg" alt="Transport Service Medellin Logo" class="footer-logo">
-                </div>
-                <div class="footer-column">
-                    <h3>Contacto</h3>
-                    <div class="contact-info">
-                        <p><span class="icon">📱</span> +57 324 6281456</p>
-                        <p><span class="icon">📧</span> transportservicemedellin@gmail.com</p>
-                        <p><span class="icon">📍</span> Medellín, Colombia</p>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Redes sociales</h3>
-                    <div class="social-links">
-                        <p><span class="icon">👤</span> @transportservice_med</p>
-                        <p><span class="icon">📸</span> @transportservice_medellin</p>
-                        <p><span class="icon">🎵</span> @transportservice_med</p>
-                    </div>
+        <h2>Iniciar Sesión</h2>
+        <form id="login-form">
+            <label for="login-email">Email:</label>
+            <input type="email" id="login-email" required>
+            
+            <label for="login-password">Contraseña:</label>
+            <input type="password" id="login-password" required>
+            
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <img src="Assets/Imgs/logos/iconweb.svg" alt="Transport Service Medellin Logo" class="footer-logo">
+            </div>
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <div class="contact-info">
+                    <p><span class="icon">📱</span> +57 324 6281456</p>
+                    <p><span class="icon">📧</span> transportservicemedellin@gmail.com</p>
+                    <p><span class="icon">📍</span> Medellín, Colombia</p>
                 </div>
             </div>
-    
+            <div class="footer-column">
+                <h3>Redes sociales</h3>
+                <div class="social-links">
+                    <p><span class="icon">👤</span> @transportservice_med</p>
+                    <p><span class="icon">📸</span> @transportservice_medellin</p>
+                    <p><span class="icon">🎵</span> @transportservice_med</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="footer-bottom">
+        <p>Made by <a href="#" class="Autores">Julian Fernandez - Juan Felipe Joaqui - Santiago Maya</a></p>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-   
     <script type="module" src="Assets/js/main.js"></script>
 
     <!-- Dark Mode Script -->
@@ -308,31 +363,5 @@ Confía en nosotros para llegar a tu destino de manera rápida y segura. Tu movi
             document.getElementById('sun-icon').style.display = 'inline-block';
         }
     </script>
-
 </body>
-<div class="contact-form">
-    <h2>Contactanos</h2>
-    <form action="submit_form.php" method="POST">
-        <label for="Nombre">Nombre completo:</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="celular">Celular:</label>
-        <input type="celular" id="celular" name="celular" required>
-
-        <label for="message">Mensaje:</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
-
-        <button type="submit">Enviar</button>
-    </form>
-</div>
-<div class="footer-bottom">
-    <p>Made </span> by <a href="#" class="Autores">Julian Fernandez - Juan Felipe Joaqui - Santiago Maya</a></p>
-</div>
-</footer>
-
-</footer>
-
 </html>
