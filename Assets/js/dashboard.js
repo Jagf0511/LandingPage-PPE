@@ -14,18 +14,26 @@ function verificarAutenticacion() {
     return true;
 }
 
-// Función para obtener y mostrar los elementos
+// Obtener elementos SIN librería (Usando fetch)
 async function obtenerElementos() {
     if (!verificarAutenticacion()) return;
 
     try {
-        const { data, error } = await supabase
-            .from("toures")
-            .select("id, nombre, descripcion, precio, duracion, destino")
-            .limit(100);
+        const url = "https://fqulwjwfpatbcamctscm.supabase.co/rest/v1/toures";
+        const apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZxdWx3andmcGF0YmNhbWN0c2NtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIzNDA2OTAsImV4cCI6MjA1NzkxNjY5MH0._o9h-G5qaxzjjI_hok5bbRrCVEFwiTtKqC2JiMLw0sc";
 
-        if (error) throw error;
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "apikey": apiKey,
+                "Authorization": `Bearer ${apiKey}`,
+                "Content-Type": "application/json"
+            }
+        });
 
+        if (!response.ok) throw new Error("Error al obtener los datos");
+
+        const data = await response.json();
         mostrarElementos(data);
     } catch (error) {
         console.error("Error al obtener elementos:", error);
