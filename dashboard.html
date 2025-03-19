@@ -19,19 +19,90 @@
     <input type="text" id="searchInput" placeholder="Buscar elemento...">
     <button id="searchButton">Buscar</button>
 
+    <!-- Botón para agregar un nuevo elemento -->
+    <button id="addButton">➕ Agregar Elemento</button>
+
     <table id="resultsTable">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Duración</th>
+                <th>Ubicación</th>
+                <th>Acciones</th> <!-- Nueva columna para los botones -->
             </tr>
         </thead>
         <tbody id="resultsBody">
             <!-- Aquí se insertarán los resultados -->
         </tbody>
     </table>
+
     <button onclick="logout()">Cerrar sesión</button>
-    
-    
+
+    <script>
+        document.getElementById("addButton").addEventListener("click", function () {
+            agregarElemento();
+        });
+
+        async function agregarElemento() {
+            const nombre = prompt("Ingrese el nombre del nuevo elemento:");
+
+            if (!nombre) {
+                alert("El nombre no puede estar vacío.");
+                return;
+            }
+
+            const { data, error } = await supabase
+                .from("toures")
+                .insert([{ nombre }]);
+
+            if (error) {
+                console.error("Error al agregar:", error);
+                alert("No se pudo agregar el elemento.");
+            } else {
+                alert("Elemento agregado correctamente.");
+                obtenerElementos();
+            }
+        }
+
+        async function eliminarElemento(id) {
+            if (!confirm("¿Seguro que deseas eliminar este elemento?")) return;
+
+            const { error } = await supabase
+                .from("toures")
+                .delete()
+                .eq("id", id);
+
+            if (error) {
+                console.error("Error al eliminar:", error);
+                alert("No se pudo eliminar el elemento.");
+            } else {
+                alert("Elemento eliminado correctamente.");
+                obtenerElementos();
+            }
+        }
+
+        function agregarBotonesEliminar() {
+            document.querySelectorAll("#resultsBody tr").forEach(row => {
+                // Verificar si la celda de acciones ya tiene un botón para evitar duplicados
+                if (row.cells.length === 7) return;
+
+                const id = row.cells[0].textContent;
+                const btnEliminar = document.createElement("button");
+                btnEliminar.textContent = "❌ Eliminar";
+                btnEliminar.onclick = () => eliminarElemento(id);
+                
+                const celdaAccion = row.insertCell(-1);
+                celdaAccion.appendChild(btnEliminar);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(agregarBotonesEliminar, 2000);
+        });
+    </script>
+
 </body>
 </html>
