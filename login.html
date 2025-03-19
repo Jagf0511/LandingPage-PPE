@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,24 +10,21 @@
     <div class="wrap-form">
         <div class="half">
             <button onclick="irAInicio()">Regresar</button>
-
         </div>
-        <form action="/login" method="POST">
+        <form id="login-form">  <!-- Se cambia el método para usar JS -->
             <div class="text-login">
                 <h2>Iniciar sesión</h2>
             </div>
             <div class="email">
-            <input type="text" id="username" name="username" placeholder="Ingrese un correo electronico" required>
+                <input type="text" id="username" name="username" placeholder="Ingrese un correo electrónico" required>
             </div>
             <div class="password">
                 <input type="password" id="password" name="password" placeholder="Ingrese una contraseña" required>
             </div>
-            
-    
             <input type="submit" value="Login">
         </form>
-    
     </div>
-    <script src="/Assets/js/login.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script type="module" src="/Assets/js/login.js"></script>
 </body>
 </html>
