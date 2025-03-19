@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("login-form");
 
     form.addEventListener("submit", async function (event) {
-        event.preventDefault(); // Evita que la página se recargue
+        event.preventDefault();
 
         const email = document.getElementById("username").value.trim();
         const password = document.getElementById("password").value.trim();
@@ -24,18 +24,27 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // Autenticación con Supabase
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email,
-            password
-        });
+        // Intentar iniciar sesión con Supabase
+        let { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
         if (error) {
-            console.error("Error al iniciar sesión:", error.message);
-            alert("Error: " + error.message);
-        } else {
+            console.warn("El usuario no existe, intentando registrarlo...");
+
+            // Si no existe, intentar registrarlo automáticamente
+            let { data: signUpData, error: signUpError } = await supabase.auth.signUp({ email, password });
+
+            if (signUpError) {
+                alert("Error al registrar usuario: " + signUpError.message);
+            } else {
+                alert("Usuario registrado. Revisa tu correo para confirmar.");
+                return;
+            }
+        }
+
+        if (data) {
             alert("Inicio de sesión exitoso. Redirigiendo...");
-            window.location.href = "/dashboard.html"; // Redirigir a otra página
+            localStorage.setItem("user", JSON.stringify(data.user));
+            window.location.href = "/dashboard.html";
         }
     });
 });
