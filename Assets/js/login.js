@@ -6,45 +6,72 @@ const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = createClient(supabaseUrl, supabaseKey);
 // Función para redirigir al inicio
 
-function irAInicio() {
-    window.location.href = '/'; // Cambia la URL según sea necesario
+async function checkAuthBeforeLoad() {
+    const { data: { session }, error } = await supabase.auth.getSession();
+
+    if (error) {
+        console.error("Error al verificar sesión:", error.message);
+    }
+
+    if (!session) {
+        window.location.replace("/login.html"); // Redirigir inmediatamente si no hay sesión
+    } else {
+        document.documentElement.style.display = ""; // Mostrar la página si hay sesión
+    }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+// 🛑 Si estamos en dashboard.html, verificamos la sesión antes de mostrar contenido
+if (window.location.pathname.includes("dashboard.html")) {
+    document.documentElement.style.display = "none"; // Ocultar toda la página
+    checkAuthBeforeLoad();
+}
+
+document.addEventListener("DOMContentLoaded", async function () {
     const form = document.getElementById("login-form");
 
-    form.addEventListener("submit", async function (event) {
-        event.preventDefault();
+    if (form) {
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
 
-        const email = document.getElementById("username").value.trim();
-        const password = document.getElementById("password").value.trim();
+            const email = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
 
-        if (!email || !password) {
-            alert("Por favor, ingrese su correo y contraseña.");
-            return;
-        }
-
-        // Intentar iniciar sesión con Supabase
-        let { data, error } = await supabase.auth.signInWithPassword({ email, password });
-
-        if (error) {
-            console.warn("El usuario no existe, intentando registrarlo...");
-
-            // Si no existe, intentar registrarlo automáticamente
-            let { data: signUpData, error: signUpError } = await supabase.auth.signUp({ email, password });
-
-            if (signUpError) {
-                alert("Error al registrar usuario: " + signUpError.message);
-            } else {
-                alert("Usuario registrado. Revisa tu correo para confirmar.");
+            if (!email || !password) {
+                alert("Por favor, ingrese su correo y contraseña.");
                 return;
             }
-        }
 
-        if (data) {
-            alert("Inicio de sesión exitoso. Redirigiendo...");
-            localStorage.setItem("user", JSON.stringify(data.user));
-            window.location.href = "/dashboard.html";
-        }
-    });
+            // Autenticación con Supabase
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email,
+                password
+            });
+
+            if (error) {
+                console.error("Error al iniciar sesión:", error.message);
+                alert("Error: " + error.message);
+            } else {
+                alert("Inicio de sesión exitoso. Redirigiendo...");
+                window.location.href = "/dashboard.html"; // Redirigir a la página protegida
+            }
+        });
+    }
 });
+
+// 🔓 Función para cerrar sesión
+window.logout = async function () {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+        console.error("Error al cerrar sesión:", error.message);
+    } else {
+        alert("Sesión cerrada correctamente.");
+        window.location.href = "/login.html";
+    }
+};
+
+window.irAInicio = function () {
+    window.location.href = "/index.html"; // Ajusta la ruta según tu estructura de archivos
+}
+
+
