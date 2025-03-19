@@ -1,80 +1,72 @@
-// Configuración Supabase
-const SUPABASE_URL = "https://zrrbszeuhxqblgtncgrb.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpycmJzemV1aHhxYmxndG5jZ3JiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIzNTE4NjcsImV4cCI6MjA1NzkyNzg2N30.tjTL7f3RwIenz_i10gGjTXxxVH7CMyD8O6hH4KoJNRM";
+// Configuración de Supabase
+const SUPABASE_URL = "https://fqulwjwfpatbcamctscm.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZxdWx3andmcGF0YmNhbWN0c2NtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIzNDA2OTAsImV4cCI6MjA1NzkxNjY5MH0._o9h-G5qaxzjjI_hok5bbRrCVEFwiTtKqC2JiMLw0sc";
 
-// Variable global para el cliente de Supabase
-let supabaseClient = null;
-
-// Inicializar Supabase cuando la página esté lista
-window.onload = function () {
-    try {
-        // Crear cliente de Supabase
-        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-        console.log("Supabase inicializado correctamente");
-
-        // Probar conexión
-        testConnection();
-    } catch (error) {
-        console.error("Error al inicializar Supabase:", error);
-        alert("Error al conectar con la base de datos. Revisa la consola para más detalles.");
-    }
-};
-
-// Función para probar la conexión
-async function testConnection() {
-    try {
-        const { data, error } = await supabaseClient.from("items").select("count");
-
-        if (error) {
-            console.error("Error de conexión:", error);
-        } else {
-            console.log("Conexión exitosa con Supabase:", data);
-        }
-    } catch (err) {
-        console.error("Error al probar la conexión:", err);
-    }
-}
-
-// Función para buscar elementos (global para ser accesible desde HTML)
-window.buscarElemento = async function () {
-    const query = document.getElementById("searchInput").value.trim();
-    const resultsBody = document.getElementById("resultsBody");
-
-    if (query === "") {
-        resultsBody.innerHTML = "<tr><td colspan='2'>Ingrese un término de búsqueda</td></tr>";
+// Función para obtener y mostrar los 100 elementos
+async function obtenerElementos() {
+    const token = localStorage.getItem("supabase_token"); // Recuperar el token de autenticación
+    if (!token) {
+        alert("No tienes acceso. Inicia sesión.");
+        window.location.href = "/login.html";
         return;
     }
 
     try {
-        console.log("Buscando:", query);
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/toures?select=id,nombre,descripcion,precio,duracion,destino&limit=100`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "apikey": SUPABASE_KEY,
+                "Authorization": `Bearer ${token}`
+            }
+        });
 
-        const { data, error } = await supabaseClient
-            .from("items")
-            .select("id, name")
-            .ilike("name", `%${query}%`);
-
-        if (error) {
-            console.error("Error en la búsqueda:", error);
-            resultsBody.innerHTML = `<tr><td colspan='2'>Error en la búsqueda: ${error.message}</td></tr>`;
-            return;
+        if (!response.ok) {
+            throw new Error("Error al obtener los datos.");
         }
 
-        console.log("Resultados:", data);
+        const data = await response.json();
+        mostrarElementos(data);
 
-        if (!data || data.length === 0) {
-            resultsBody.innerHTML = "<tr><td colspan='2'>No se encontraron resultados</td></tr>";
-        } else {
-            resultsBody.innerHTML = "";
-            data.forEach(item => {
-                const row = `<tr>
-                    <td>${item.id}</td>
-                    <td>${item.name}</td>
-                </tr>`;
-                resultsBody.innerHTML += row;
-            });
-        }
-    } catch (err) {
-        console.error("Error:", err);
-        resultsBody.innerHTML = `<tr><td colspan='2'>Error: ${err.message}</td></tr>`;
+    } catch (error) {
+        console.error("Error al obtener elementos:", error);
+        alert("Error al cargar los datos.");
     }
-};
+}
+
+// Función para mostrar los elementos en la tabla
+function mostrarElementos(data) {
+    const tableBody = document.getElementById("resultsBody");
+    tableBody.innerHTML = "";
+
+    if (!data || data.length === 0) {
+        tableBody.innerHTML = "<tr><td colspan='5'>No hay elementos disponibles</td></tr>";
+        return;
+    }
+
+    data.forEach(item => {
+        const row = `<tr>
+            <td>${item.id}</td>
+            <td>${item.nombre}</td>
+            <td>${item.descripcion}</td>
+            <td>$${item.precio}</td>
+            <td>${item.duracion} días</td>
+            <td>${item.destino}</td>
+        </tr>`;
+        tableBody.innerHTML += row;
+    });
+}
+
+// Función para la búsqueda en tiempo real
+document.getElementById("searchInput").addEventListener("input", function () {
+    const filter = this.value.toLowerCase();
+    const rows = document.querySelectorAll("#resultsBody tr");
+
+    rows.forEach(row => {
+        const nombre = row.cells[1].textContent.toLowerCase();
+        row.style.display = nombre.includes(filter) ? "" : "none";
+    });
+});
+
+// Llamar a la función cuando cargue la página
+document.addEventListener("DOMContentLoaded", obtenerElementos);

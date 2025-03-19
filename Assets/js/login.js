@@ -42,21 +42,23 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
 
             // Autenticación con Supabase
-            const { data, error } = await supabase.auth.signInWithPassword({
-                email,
-                password
-            });
+            const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
             if (error) {
                 console.error("Error al iniciar sesión:", error.message);
                 alert("Error: " + error.message);
             } else {
+                // Guardar el token en localStorage
+                localStorage.setItem("supabase_token", data.session.access_token);
+                localStorage.setItem("user_email", data.user.email);
+
                 alert("Inicio de sesión exitoso. Redirigiendo...");
                 window.location.href = "/dashboard.html"; // Redirigir a la página protegida
             }
         });
     }
 });
+
 
 // 🔓 Función para cerrar sesión
 window.logout = async function () {
