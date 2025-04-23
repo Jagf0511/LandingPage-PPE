@@ -1,60 +1,171 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #121212;
+    color: white;
+    min-height: 100vh;
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
 }
 
 h1 {
+    color: #00FFCE;
     text-align: center;
-    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(0, 255, 206, 0.5);
 }
 
-input {
-    width: 80%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
 }
 
-button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
+#searchInput {
+    padding: 12px 20px;
+    width: 60%;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    border-radius: 50px 0 0 50px;
+    background-color: #2a2a2a;
+    color: white;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
-button:hover {
-    background-color: #0056b3;
+#searchInput:focus {
+    outline: none;
+    background-color: #333;
+    box-shadow: 0 4px 12px rgba(0, 255, 206, 0.2);
+}
+
+#searchButton {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 0 50px 50px 0;
+    background-color: #00FFCE;
+    color: #121212;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#searchButton:hover {
+    background-color: #00e6b8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 255, 206, 0.3);
+}
+
+#addButton {
+    display: block;
+    margin: 0 auto 40px;
+    padding: 15px 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #00FFCE 0%, #00b894 100%);
+    color: #121212;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 255, 206, 0.4);
+}
+
+#addButton:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 255, 206, 0.6);
 }
 
 table {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background: white;
-}
-
-th,
-td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 th {
-    background-color: #007BFF;
-    color: white;
+    background-color: #1a1a1a;
+    color: #00FFCE;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #00FFCE;
+}
+
+td {
+    padding: 15px;
+    border-bottom: 1px solid #333;
+    transition: all 0.2s ease;
 }
 
 tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #1e1e1e;
+}
+
+tr:hover td {
+    background-color: #2a2a2a;
+}
+
+.action-buttons button {
+    padding: 8px 15px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.edit-btn {
+    background-color: #3498db;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+.logout-btn {
+    display: block;
+    margin: 0 auto;
+    padding: 12px 25px;
+    background-color: transparent;
+    color: #00FFCE;
+    border: 2px solid #00FFCE;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #00FFCE;
+    color: #121212;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 255, 206, 0.3);
 }

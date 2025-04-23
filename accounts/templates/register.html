@@ -2,12 +2,42 @@
 {% load static %}
 
 {% block content %}
-<div class="register-container">
+<div class="wrap-form">
+    <div class="half">
+        <h2>Join Us</h2>
+        <p>Create an account to access all features and manage your content.</p>
+        <button>Learn More</button>
+    </div>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="text-login">
+            <h2>Register</h2>
+            <p>Fill in your details to create an account</p>
+        </div>
+        
+        <div class="input-group">
+            <input type="text" name="username" id="id_username" required placeholder=" ">
+            <label for="id_username">Username</label>
+        </div>
+        
+        <div class="input-group">
+            <input type="email" name="email" id="id_email" required placeholder=" ">
+            <label for="id_email">Email</label>
+        </div>
+        
+        <div class="input-group">
+            <input type="password" name="password1" id="id_password1" required placeholder=" ">
+            <label for="id_password1">Password</label>
+        </div>
+        
+        <div class="input-group">
+            <input type="password" name="password2" id="id_password2" required placeholder=" ">
+            <label for="id_password2">Confirm Password</label>
+        </div>
+        
         <button type="submit">Register</button>
+        
+        <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
     </form>
-    <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
 </div>
 {% endblock %}

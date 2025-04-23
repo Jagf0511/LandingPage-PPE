@@ -46,8 +46,9 @@ INSTALLED_APPS = [
 # Actualiza la configuración de archivos estáticos
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'Assets'),  # Cambiamos 'assets' a 'Assets' para que coincida con tu estructura
+    os.path.join(BASE_DIR, 'Assets'),
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -64,11 +65,11 @@ ROOT_URLCONF = 'landing_page.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Añadimos esta ruta
-        'APP_DIRS': True,
+        'DIRS': [],  # Dejamos esto vacío para que solo busque en las apps
+        'APP_DIRS': True,  # Esto hará que busque en la carpeta templates de cada app
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',  # Añadimos este que faltaba
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',

@@ -2,28 +2,32 @@
 {% load static %}
 
 {% block content %}
-<div class="login-box">
-    <h2>Login</h2>
+<div class="wrap-form">
+    <div class="half">
+        <h2>Welcome Back</h2>
+        <p>Log in to access your dashboard and manage your content.</p>
+        <button>Explore</button>
+    </div>
     <form method="post">
         {% csrf_token %}
-        <div class="user-box">
-            <input type="text" name="{{ form.username.name }}" required="" id="{{ form.username.id_for_label }}">
-            <label>Username</label>
+        <div class="text-login">
+            <h2>Login</h2>
+            <p>Enter your credentials to continue</p>
         </div>
-        <div class="user-box">
-            <input type="password" name="{{ form.password.name }}" required="" id="{{ form.password.id_for_label }}">
-            <label>Password</label>
+        
+        <div class="input-group">
+            <input type="text" name="username" id="id_username" required placeholder=" ">
+            <label for="id_username">Username</label>
         </div>
-        <button type="submit">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Login
-        </button>
-    </form>
-    <div class="register-link">
+        
+        <div class="input-group">
+            <input type="password" name="password" id="id_password" required placeholder=" ">
+            <label for="id_password">Password</label>
+        </div>
+        
+        <button type="submit">Login</button>
+        
         <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
-    </div>
+    </form>
 </div>
 {% endblock %}
