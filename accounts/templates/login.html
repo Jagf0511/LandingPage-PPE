@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="login-box">
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="user-box">
+            <input type="text" name="{{ form.username.name }}" required="" id="{{ form.username.id_for_label }}">
+            <label>Username</label>
+        </div>
+        <div class="user-box">
+            <input type="password" name="{{ form.password.name }}" required="" id="{{ form.password.id_for_label }}">
+            <label>Password</label>
+        </div>
+        <button type="submit">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Login
+        </button>
+    </form>
+    <div class="register-link">
+        <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+    </div>
+</div>
+{% endblock %}
