@@ -1,0 +1,20 @@
+<!-- filepath: c:\Users\USUARIO\Downloads\LandingPage-PPE\mysite\landing\templates\agregar_elemento.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Elemento</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+    <h2>Agregar Nuevo Elemento</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+    <a href="{% url 'dashboard' %}">Volver al Dashboard</a>
+</body>
+</html>

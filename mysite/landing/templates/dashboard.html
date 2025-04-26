@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+
+<body>
+    <h1>Dashboard</h1>
+
+    <!-- Barra de búsqueda -->
+    <input type="text" id="searchInput" placeholder="Buscar elemento...">
+    <button id="searchButton">Buscar</button>
+
+    <!-- Botón para agregar un nuevo elemento -->
+    <button id="addButton">➕ Agregar Elemento</button>
+
+    <!-- Tabla de resultados -->
+    <table id="resultsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Duración</th>
+                <th>Ubicación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="resultsBody">
+            {% for elemento in elementos %}
+            <tr>
+                <td>{{ elemento.id }}</td>
+                <td>{{ elemento.nombre }}</td>
+                <td>{{ elemento.descripcion }}</td>
+                <td>{{ elemento.precio }}</td>
+                <td>{{ elemento.duracion }}</td>
+                <td>{{ elemento.ubicacion }}</td>
+                <td>
+                    <!-- Botón para editar -->
+                    <button onclick="editarElemento({{ elemento.id }}, '{{ elemento.nombre }}', '{{ elemento.descripcion }}', {{ elemento.precio }}, {{ elemento.duracion }}, '{{ elemento.ubicacion }}')">✏️ Editar</button>
+                    
+                    <!-- Formulario para eliminar -->
+                    <form method="POST" action="{% url 'eliminar_elemento' elemento.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">❌ Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Botón para cerrar sesión -->
+    <form method="POST" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Cerrar sesión</button>
+    </form>
+
+    <script>
+        // Función para agregar un nuevo elemento
+        document.getElementById("addButton").addEventListener("click", function () {
+            const nombre = prompt("Ingrese el nombre del nuevo elemento:");
+            if (!nombre) {
+                alert("El nombre no puede estar vacío.");
+                return;
+            }
+            // Redirigir al formulario de creación con el nombre prellenado
+            window.location.href = `/dashboard/agregar/?nombre=${encodeURIComponent(nombre)}`;
+        });
+
+        // Función para buscar en todas las columnas
+        document.getElementById("searchButton").addEventListener("click", function () {
+            const filter = document.getElementById("searchInput").value.toLowerCase();
+            const rows = document.querySelectorAll("#resultsBody tr");
+
+            rows.forEach(row => {
+                const cells = row.querySelectorAll("td");
+                const match = Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(filter));
+                row.style.display = match ? "" : "none";
+            });
+        });
+
+        // Función para editar un elemento
+        function editarElemento(id, nombre, descripcion, precio, duracion, ubicacion) {
+            const nuevoNombre = prompt("Editar nombre:", nombre);
+            const nuevaDescripcion = prompt("Editar descripción:", descripcion);
+            const nuevoPrecio = prompt("Editar precio:", precio);
+            const nuevaDuracion = prompt("Editar duración (días):", duracion);
+            const nuevaUbicacion = prompt("Editar ubicación:", ubicacion);
+
+            if (nuevoNombre && nuevaDescripcion && nuevoPrecio && nuevaDuracion && nuevaUbicacion) {
+                // Redirigir a la vista de edición con los datos actualizados
+                const url = `/dashboard/editar/${id}/?nombre=${encodeURIComponent(nuevoNombre)}&descripcion=${encodeURIComponent(nuevaDescripcion)}&precio=${encodeURIComponent(nuevoPrecio)}&duracion=${encodeURIComponent(nuevaDuracion)}&ubicacion=${encodeURIComponent(nuevaUbicacion)}`;
+                window.location.href = url;
+            } else {
+                alert("Todos los campos son obligatorios.");
+            }
+        }
+    </script>
+</body>
+
+</html>
