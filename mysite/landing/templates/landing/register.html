@@ -1,0 +1,26 @@
+<!-- filepath: c:\Users\USUARIO\Downloads\LandingPage-PPE\mysite\landing\templates\register.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="form-section">
+            <h2>Registro de Usuario</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Registrar</button>
+            </form>
+            <a href="{% url 'login' %}">¿Ya tienes una cuenta? Inicia sesión</a>
+            <br>
+            <button onclick="window.location.href='{% url 'index' %}';"> Volver al Inicio</button>
+        </div>
+    </div>
+</body>
+</html>
