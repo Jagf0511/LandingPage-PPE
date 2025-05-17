@@ -123,6 +123,10 @@ LOGIN_URL = '/login/'  # URL para el inicio de sesión
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'landing' / 'static']
 
+# Configuración para archivos multimedia (imágenes)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGGING = {

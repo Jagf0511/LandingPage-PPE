@@ -31,7 +31,7 @@ def dashboard(request):
 @login_required
 def agregar_elemento(request):
     if request.method == 'POST':
-        form = ElementoForm(request.POST)
+        form = ElementoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, 'Elemento agregado correctamente.')
@@ -48,7 +48,7 @@ def agregar_elemento(request):
 def editar_elemento(request, elemento_id):
     elemento = get_object_or_404(Elemento, id=elemento_id)
     if request.method == 'POST':
-        form = ElementoForm(request.POST, instance=elemento)
+        form = ElementoForm(request.POST, request.FILES, instance=elemento)
         if form.is_valid():
             form.save()
             messages.success(request, 'Elemento editado correctamente.')

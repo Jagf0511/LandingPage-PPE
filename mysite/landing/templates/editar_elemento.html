@@ -31,13 +31,12 @@
                 </button>
             </form>
         </div>
-        <div class="form-container">
-            <h1 class="text-center mb-4">
+        <div class="form-container">            <h1 class="text-center mb-4">
                 <span class="lang-es">Editar Elemento</span>
                 <span class="lang-en">Edit Element</span>
             </h1>
 
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="{{ form.nombre.id_for_label }}" class="form-label">
@@ -111,14 +110,39 @@
                             <input type="text" name="{{ form.ubicacion.name }}" id="{{ form.ubicacion.id_for_label }}" 
                                 class="form-control {% if form.ubicacion.errors %}is-invalid{% endif %}" 
                                 value="{{ form.ubicacion.value|default:'' }}" 
-                                placeholder="Ej: Medellín, Guatapé, Jardín, Santa Fe de Antioquia" required>
-                            {% if form.ubicacion.errors %}
+                                placeholder="Ej: Medellín, Guatapé, Jardín, Santa Fe de Antioquia" required>                            {% if form.ubicacion.errors %}
                             <div class="invalid-feedback">{{ form.ubicacion.errors }}</div>
                             {% endif %}
                         </div>
                     </div>
                 </div>
-                  <div class="d-flex justify-content-between mt-4">
+                
+                <div class="mb-3">
+                    <label for="{{ form.foto.id_for_label }}" class="form-label">
+                        <span class="lang-es">Foto</span>
+                        <span class="lang-en">Photo</span>
+                    </label>
+                    
+                    {% if elemento.foto %}
+                    <div class="mb-2">
+                        <img src="{{ elemento.foto.url }}" alt="Foto actual" style="max-width: 200px; max-height: 150px;" class="img-thumbnail">
+                        <p class="text-muted small mt-1">Foto actual</p>
+                    </div>
+                    {% endif %}
+                    
+                    <input type="file" name="{{ form.foto.name }}" id="{{ form.foto.id_for_label }}" 
+                        class="form-control {% if form.foto.errors %}is-invalid{% endif %}"
+                        accept="image/*">
+                    {% if form.foto.errors %}
+                    <div class="invalid-feedback">{{ form.foto.errors }}</div>
+                    {% endif %}
+                    <small class="form-text text-muted">
+                        <span class="lang-es">Sube una nueva imagen para reemplazar la actual (opcional).</span>
+                        <span class="lang-en">Upload a new image to replace the current one (optional).</span>
+                    </small>
+                </div>
+                
+                <div class="d-flex justify-content-between mt-4">
                     <a href="{% url 'dashboard' %}" class="btn btn-cancel">
                         Cancelar
                     </a>

@@ -63,9 +63,11 @@
                         </th>
                         <th>
                             Duración
+                        </th>                        <th>
+                            Ubicación
                         </th>
                         <th>
-                            Ubicación
+                            Foto
                         </th>
                         <th>
                             Acciones
@@ -77,10 +79,16 @@
                     <tr>
                         <td>{{ elemento.id }}</td>
                         <td>{{ elemento.nombre }}</td>
-                        <td>{{ elemento.descripcion }}</td>
-                        <td>${{ elemento.precio }}</td>
+                        <td>{{ elemento.descripcion }}</td>                        <td>{{ elemento.precio }}</td>
                         <td>{{ elemento.duracion }} días</td>
                         <td>{{ elemento.ubicacion }}</td>
+                        <td>
+                            {% if elemento.foto %}
+                                <img src="{{ elemento.foto.url }}" alt="Foto de {{ elemento.nombre }}" style="max-width: 100px; max-height: 80px;" class="img-thumbnail">
+                            {% else %}
+                                <span class="text-muted">Sin foto</span>
+                            {% endif %}
+                        </td>
                         <td>
                             <!-- Botón para editar -->                            <a href="{% url 'editar_elemento' elemento.id %}" class="btn btn-warning btn-sm">
                                 ✏️ Editar

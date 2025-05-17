@@ -13,4 +13,7 @@ class CustomUserCreationForm(UserCreationForm):
 class ElementoForm(forms.ModelForm):
     class Meta:
         model = Elemento
-        fields = ['nombre', 'descripcion', 'precio', 'duracion', 'ubicacion']
+        fields = ['nombre', 'descripcion', 'precio', 'duracion', 'ubicacion', 'foto']
+        widgets = {
+            'foto': forms.FileInput(attrs={'class': 'form-control', 'accept': 'image/*'})
+        }
