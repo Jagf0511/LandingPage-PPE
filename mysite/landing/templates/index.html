@@ -13,8 +13,12 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <style>
+        .lang-en, .lang-es {
+            display: inline-block;
+        }
+    </style>
 </head>
 
 <body>
@@ -25,14 +29,26 @@
                     <a class="logowpp" target="_blank" href="https://wa.me/573246281456"><img src="{% static 'Imgs/logos/wpp-03.svg' %}" alt="WhatsApp"></a>
                     <a class="fb" target="_blank" href="https://www.facebook.com/profile.php?id=100089531658354"><img src="{% static 'Imgs/logos/facebook-04.svg' %}" alt="Facebook"></a>
                     <a class="ig" target="_blank" href="https://www.instagram.com/transportservice_medellin/"><img src="{% static 'Imgs/logos/instagram-01.svg' %}" alt="Instagram"></a>
-                </div>
-                <a><img class="logo" src="{% static 'Imgs/logos/logotipo_web.svg' %}" alt="Logotipo Transport Service Medellin"></a>
-                <div class="list-nav">
-                    <a class="list" href="{% url 'index' %}">Home</a>
-                    <a class="list" href="#about-us">About us</a>
+                </div>                <a><img class="logo" src="{% static 'Imgs/logos/logotipo_web.svg' %}" alt="Logotipo Transport Service Medellin"></a>                
+                <div class="list-nav">                    
+                    <a class="list" href="{% url 'index' %}">
+                        <span class="lang-es">Inicio</span>
+                        <span class="lang-en">Home</span>
+                    </a>
+                    <a class="list" href="#about-us">
+                        <span class="lang-es">Sobre nosotros</span>
+                        <span class="lang-en">About us</span>
+                    </a>
                     <a class="list" target="_blank" href="https://drive.google.com/file/d/1MZFcI5pwCUe6oWQOEQRYkOdcMfsOj6dU/view?usp=sharing">Brochure</a>
-                    <a href="{% url 'login' %}" class="btn">Iniciar sesión</a>
-                    <a class="register_btn" href="{% url 'register' %}">Registrarse</a>
+                    <a id="translate-btn" class="list translate-btn" href="javascript:void(0);">English</a>
+                    <a href="{% url 'login' %}" class="login_btn">
+                        <span class="lang-es">Iniciar sesión</span>
+                        <span class="lang-en">Login</span>
+                    </a>
+                    <a class="register_btn" href="{% url 'register' %}">
+                        <span class="lang-es">Registrarse</span>
+                        <span class="lang-en">Sign up</span>
+                    </a>
                 </div>
                 <button class="abrir visible"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
@@ -60,37 +76,57 @@
                 <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="3"
                     aria-label="Slide 4"></button>
             </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
+            <div class="carousel-inner">                <div class="carousel-item active">
                     <img src="{% static 'Imgs/photos/carrusel_1-min.jpg' %}" class="d-block w-100"
                         style="object-fit: cover;" alt="Imagen 1">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5 style="font-size: 2rem;">Explora lugares increíbles</h5>
-                        <p style="font-size: 1.2rem;">Descubre destinos inolvidables en cada viaje.</p>
+                        <h5 style="font-size: 2rem;">
+                            <span class="lang-es">Explora lugares increíbles</span>
+                            <span class="lang-en">Explore amazing places</span>
+                        </h5>
+                        <p style="font-size: 1.2rem;">
+                            <span class="lang-es">Descubre destinos inolvidables en cada viaje.</span>
+                            <span class="lang-en">Discover unforgettable destinations in every trip.</span>
+                        </p>
                     </div>
-                </div>
-                <div class="carousel-item">
+                </div>                <div class="carousel-item">
                     <img src="{% static 'Imgs/photos/carrusel_2-min.jpg' %}" class="d-block w-100"
                         style=" object-fit: cover;" alt="Imagen 2">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5 style="font-size: 2rem;">Vive la aventura</h5>
-                        <p style="font-size: 1.2rem;">Encuentra experiencias únicas en cada rincón.</p>
+                        <h5 style="font-size: 2rem;">
+                            <span class="lang-es">Vive la aventura</span>
+                            <span class="lang-en">Live the adventure</span>
+                        </h5>
+                        <p style="font-size: 1.2rem;">
+                            <span class="lang-es">Encuentra experiencias únicas en cada rincón.</span>
+                            <span class="lang-en">Find unique experiences in every corner.</span>
+                        </p>
                     </div>
-                </div>
-                <div class="carousel-item">
+                </div>                <div class="carousel-item">
                     <img src="{% static 'Imgs/photos/carrusel_3-min.jpg' %}" class="d-block w-100"
                         style="object-fit: cover;" alt="Imagen 3">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5 style="font-size: 2rem;">Descubre nuevos horizontes</h5>
-                        <p style="font-size: 1.2rem;">Viajar es la mejor manera de aprender y crecer.</p>
+                        <h5 style="font-size: 2rem;">
+                            <span class="lang-es">Descubre nuevos horizontes</span>
+                            <span class="lang-en">Discover new horizons</span>
+                        </h5>
+                        <p style="font-size: 1.2rem;">
+                            <span class="lang-es">Viajar es la mejor manera de aprender y crecer.</span>
+                            <span class="lang-en">Traveling is the best way to learn and grow.</span>
+                        </p>
                     </div>
-                </div>
-                <div class="carousel-item">
+                </div>                <div class="carousel-item">
                     <img src="{% static 'Imgs/photos/carrusel_4-min.jpg' %}" class="d-block w-100"
                         style="object-fit: cover;" alt="Imagen 4">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5 style="font-size: 2rem;">Conéctate con la naturaleza</h5>
-                        <p style="font-size: 1.2rem;">Los paisajes más hermosos te esperan.</p>
+                        <h5 style="font-size: 2rem;">
+                            <span class="lang-es">Conéctate con la naturaleza</span>
+                            <span class="lang-en">Connect with nature</span>
+                        </h5>
+                        <p style="font-size: 1.2rem;">
+                            <span class="lang-es">Los paisajes más hermosos te esperan.</span>
+                            <span class="lang-en">The most beautiful landscapes await you.</span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -164,9 +200,11 @@
         <div class="footer-container">
             <div class="footer-column">
                 <img src="{% static 'Imgs/logos/iconweb.svg' %}" alt="Transport Service Medellin Logo" class="footer-logo">
-            </div>
-            <div class="footer-column">
-                <h3>Contacto</h3>
+            </div>            <div class="footer-column">
+                <h3>
+                    <span class="lang-es">Contacto</span>
+                    <span class="lang-en">Contact</span>
+                </h3>
                 <div class="contact-info">
                     <p><span class="icon">📱</span> +57 324 6281456</p>
                     <p><span class="icon">📧</span> transportservicemedellin@gmail.com</p>
@@ -174,7 +212,10 @@
                 </div>
             </div>
             <div class="footer-column">
-                <h3>Redes sociales</h3>
+                <h3>
+                    <span class="lang-es">Redes sociales</span>
+                    <span class="lang-en">Social Networks</span>
+                </h3>
                 <div class="social-links">
                     <p><span class="icon">👤</span> @transportservice_med</p>
                     <p><span class="icon">📸</span> @transportservice_medellin</p>
@@ -185,11 +226,9 @@
     </footer>
 
     <div class="footer-bottom">
-        <p>Made by <a href="#" class="Autores"> Julian Fernandez - Juan Felipe Joaqui - Santiago Maya</a></p>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+        <p>Made by <a href="#" class="Autores"> Julian Fernandez - Juan Felipe Joaqui - Santiago Maya</a></p>    </div>    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-    <script type="module" src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/simplified_translation.js' %}"></script>
+<script src="{% static 'js/improved_translation.js' %}"></script>
 </body>
 </html>

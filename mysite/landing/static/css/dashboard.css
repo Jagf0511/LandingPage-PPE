@@ -1,200 +1,110 @@
-/* Estilo general */
-body {
-    font-family: 'Montserrat', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #000000, #0a1a2a);
-    color: #fff;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Contenedor principal */
+/* Dashboard CSS for LandingPage-PPE */
 .container {
-    width: 90%;
-    max-width: 1200px;
-    background-color: rgba(15, 23, 42, 0.9);
-    border-radius: 15px;
-    box-shadow: 0 8px 32px rgba(0, 123, 255, 0.3);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 123, 255, 0.18);
-    padding: 30px;
-    margin: 40px 0;
+    padding-top: 50px;
 }
 
-/* Título */
-h1 {
-    text-align: center;
-    color: #fff;
-    margin-bottom: 30px;
-    font-size: 32px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    position: relative;
-}
-
-h1:after {
-    content: '';
-    position: absolute;
-    width: 80px;
-    height: 3px;
-    background: #007bff;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-/* Barra de búsqueda */
-input[type="text"] {
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 25px;
-    border: none;
-    border-radius: 50px;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    font-size: 16px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    border-bottom: 2px solid #007bff;
-}
-
-input[type="text"]:focus {
-    outline: none;
-    background-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
-}
-
-input[type="text"]::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-}
-
-/* Botones */
-button {
-    padding: 12px 25px;
-    background: linear-gradient(to right, #007bff, #0056b3);
-    color: #ffffff;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 5px;
-}
-
-button:hover {
-    background: linear-gradient(to right, #0056b3, #003d80);
-    transform: translateY(-3px);
-    box-shadow: 0 7px 14px rgba(0, 123, 255, 0.3);
-}
-
-button:focus {
-    outline: none;
-}
-
-/* Tabla */
-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    margin-top: 30px;
-    background-color: rgba(15, 23, 42, 0.7);
-    color: #fff;
+/* Table styling */
+.table-responsive {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-th, td {
-    padding: 18px 15px;
-    text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+.table {
+    margin-bottom: 0;
 }
 
-th {
-    background: linear-gradient(to right, #007bff, #0056b3);
-    color: #ffffff;
-    text-transform: uppercase;
+.table-dark th {
+    background-color: var(--secondary-color);
+    color: white;
     font-weight: 600;
+    text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-tr:last-child td {
-    border-bottom: none;
+.table td,
+.table th {
+    vertical-align: middle;
 }
 
-tr:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.05);
-}
-
-tr:hover {
-    background-color: rgba(0, 123, 255, 0.1);
-    transition: all 0.3s ease;
-}
-
-/* Enlaces */
-a {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    margin-top: 15px;
-    display: inline-block;
-}
-
-a:hover {
-    color: #00a8ff;
-    text-decoration: none;
-}
-
-/* Acciones en tabla */
-.action-buttons {
-    display: flex;
-    gap: 10px;
-}
-
-.btn-edit, .btn-delete, .btn-view {
+/* Search bar styling */
+#searchInput {
+    border-radius: 20px;
+    border: 1px solid var(--secondary-color);
     padding: 8px 15px;
-    border-radius: 50px;
-    font-size: 14px;
-    font-weight: 500;
     transition: all 0.3s ease;
 }
 
-.btn-edit {
-    background: linear-gradient(to right, #007bff, #0056b3);
-    color: white;
+#searchInput:focus {
+    box-shadow: 0 0 8px rgba(0, 132, 255, 0.4);
+    border-color: var(--secondary-color);
 }
 
-.btn-delete {
-    background: linear-gradient(to right, #ff5252, #c50e0e);
-    color: white;
+#searchButton {
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
 }
 
-.btn-view {
-    background: linear-gradient(to right, #00c853, #009624);
-    color: white;
+/* Action buttons styling */
+.btn-warning,
+.btn-danger {
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin: 2px;
+    font-size: 0.8rem;
 }
 
-/* Responsive */
+.btn-success {
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 20px;
+}
+
+/* Footer styling */
+.footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 30px 0;
+    margin-top: 50px;
+}
+
+.footer h4 {
+    color: var(--secondary-color);
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.social-links a {
+    display: inline-block;
+    margin-right: 10px;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--secondary-color);
+}
+
+/* Media queries */
 @media (max-width: 768px) {
     .container {
-        width: 95%;
-        padding: 20px;
+        padding-top: 30px;
     }
-    
-    th, td {
-        padding: 12px 10px;
+
+    .btn {
+        width: 100%;
+        margin-bottom: 5px;
     }
-    
-    h1 {
-        font-size: 24px;
+
+    th,
+    td {
+        font-size: 0.8rem;
+    }
+
+    .col-md-4 {
+        margin-top: 15px;
     }
 }

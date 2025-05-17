@@ -12,7 +12,7 @@ def index(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Tu cuenta ha sido creada exitosamente. Ahora puedes iniciar sesión.')
@@ -20,7 +20,7 @@ def register(request):
         else:
             messages.error(request, 'Por favor corrige los errores en el formulario.')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'register.html', {'form': form})
 
 @login_required
@@ -47,16 +47,15 @@ def agregar_elemento(request):
 @login_required
 def editar_elemento(request, elemento_id):
     elemento = get_object_or_404(Elemento, id=elemento_id)
-    if request.method == 'GET':
-        # Actualizar los datos del elemento con los parámetros de la URL
-        elemento.nombre = request.GET.get('nombre', elemento.nombre)
-        elemento.descripcion = request.GET.get('descripcion', elemento.descripcion)
-        elemento.precio = request.GET.get('precio', elemento.precio)
-        elemento.duracion = request.GET.get('duracion', elemento.duracion)
-        elemento.ubicacion = request.GET.get('ubicacion', elemento.ubicacion)
-        elemento.save()
-        messages.success(request, 'Elemento editado correctamente.')
-        return redirect('dashboard')
+    if request.method == 'POST':
+        form = ElementoForm(request.POST, instance=elemento)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Elemento editado correctamente.')
+            return redirect('dashboard')
+    else:
+        form = ElementoForm(instance=elemento)
+    return render(request, 'editar_elemento.html', {'form': form, 'elemento': elemento})
 
 @login_required
 def eliminar_elemento(request, elemento_id):
