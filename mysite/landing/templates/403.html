@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container mt-5 pt-5">
+    <div class="alert alert-danger text-center">
+        <h1>⚠️ Acceso Denegado</h1>
+        <p class="lead">No tienes los permisos necesarios para acceder a esta página.</p>
+        <hr>
+        <p>{{ exception }}</p>
+        <div class="mt-4">
+            <a href="{% url 'dashboard' %}" class="btn btn-primary">Volver al Dashboard</a>
+            <a href="{% url 'index' %}" class="btn btn-secondary ms-2">Ir a la página principal</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

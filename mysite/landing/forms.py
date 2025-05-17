@@ -15,5 +15,10 @@ class ElementoForm(forms.ModelForm):
         model = Elemento
         fields = ['nombre', 'descripcion', 'precio', 'duracion', 'ubicacion', 'foto']
         widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'descripcion': forms.Textarea(attrs={'class': 'form-control'}),
+            'precio': forms.NumberInput(attrs={'class': 'form-control'}),
+            'duracion': forms.NumberInput(attrs={'class': 'form-control'}),
+            'ubicacion': forms.TextInput(attrs={'class': 'form-control'}),
             'foto': forms.FileInput(attrs={'class': 'form-control', 'accept': 'image/*'})
         }

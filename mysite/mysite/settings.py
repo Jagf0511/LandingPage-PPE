@@ -27,6 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Redireccionamiento de login
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'dashboard'
+
+# Handler para páginas de error personalizadas
+HANDLER403 = 'landing.views.custom_permission_denied_view'
+
 
 # Application definition
 
@@ -48,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'landing.middleware.UserTypeMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -62,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'landing.context_processors.user_type',
             ],
         },
     },
