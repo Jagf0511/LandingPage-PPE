@@ -1,164 +1,271 @@
-/* Estilos específicos para la página de registro que complementan style.css */
+/* Estilos específicos para la página de registro */
 :root {
     --primary-color: #181818;
     --secondary-color: #00FFCE;
     --base: #ffffff;
+    --card-bg: rgba(28, 28, 28, 0.95);
+    --text-color: #e0e0e0;
+    --text-muted: #a0a0a0;
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
 }
 
-/* Contenedor principal del registro adaptado al diseño */
+/* Contenedor principal del registro */
 .register-container {
-    margin-top: 110px;
-    /* Espacio para que no choque con la barra de navegación */
-    padding: 50px 20px;
-    min-height: calc(100vh - 110px);
-    /* Asegura que ocupe al menos toda la altura visible */
+    min-height: calc(100vh - 100px);
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: var(--primary-color);
+    padding: 40px 20px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('/static/Imgs/fondo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    z-index: 1;
 }
 
 .register-form-container {
-    background-color: rgba(24, 24, 24, 0.8);
-    border-radius: 15px;
+    background: var(--card-bg);
     padding: 40px;
-    box-shadow: 0 10px 30px rgba(0, 255, 206, 0.2);
-    max-width: 600px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     width: 100%;
-    border: 1px solid rgba(0, 255, 206, 0.1);
-    backdrop-filter: blur(5px);
+    max-width: 500px;
+    border: 1px solid rgba(0, 255, 206, 0.15);
+    backdrop-filter: blur(10px);
+    transform: translateY(0);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.register-form-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-color), #00a3ff);
 }
 
 .register-form-container h2 {
-    color: var(--secondary-color);
-    font-weight: 600;
     text-align: center;
     margin-bottom: 30px;
+    color: var(--base);
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
     position: relative;
 }
 
-.register-form-container h2:after {
-    content: '';
-    position: absolute;
-    width: 50px;
-    height: 3px;
-    background-color: var(--secondary-color);
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
+.register-form-container h2 span {
+    color: var(--secondary-color);
+    font-weight: 700;
 }
 
-/* Formulario */
+/* Estilos para el formulario */
 .register-form {
     display: flex;
     flex-direction: column;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 1.5rem;
+    position: relative;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
     color: var(--base);
-    font-weight: 400;
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
     width: 100%;
-    padding: 12px 15px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: none;
-    border-bottom: 2px solid var(--secondary-color);
-    border-radius: 8px;
+    padding: 0.85rem 1.25rem;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
     color: var(--base);
-    font-size: 16px;
-    transition: all 0.3s ease;
+    font-size: 1rem;
+    transition: var(--transition);
+    font-family: 'Montserrat', sans-serif;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-    outline: none;
-    background-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 10px rgba(0, 255, 206, 0.3);
-}
-
-.errorlist {
-    color: #ff5252;
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-/* Botón enviar con estilo similar a los botones de la página principal */
-.submit-btn {
-    color: var(--secondary-color);
-    font-weight: 600;
-    padding: 10px 20px;
-    border-radius: 12px;
-    border-style: solid;
-    border-width: 2px;
     border-color: var(--secondary-color);
-    background-color: transparent;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 20px auto;
+    background-color: rgba(0, 0, 0, 0.2);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 255, 206, 0.1);
+}
+
+.form-group input::placeholder,
+.form-group select::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* Estilos para mensajes de error y ayuda */
+.errorlist {
+    color: #ff6b6b;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    list-style: none;
+    padding: 0;
+}
+
+.form-text {
+    color: var(--text-muted) !important;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
     display: block;
-    transition: all 300ms ease-in-out;
-    width: auto;
+    line-height: 1.4;
+}
+
+/* Estilos para el botón de envío */
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(45deg, var(--secondary-color), #00d1ff);
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 1.5rem;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, #00d1ff, var(--secondary-color));
+    opacity: 0;
+    transition: var(--transition);
+    z-index: -1;
 }
 
 .submit-btn:hover {
-    transform: scale(1.05);
-    background-color: rgba(0, 255, 206, 0.1);
-    transition: all 300ms ease-in-out;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 255, 206, 0.2);
 }
 
-/* Enlaces */
+.submit-btn:hover::before {
+    opacity: 1;
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Estilos para los enlaces */
 .form-links {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 2rem;
+    gap: 1rem;
+    text-align: center;
 }
 
 .form-links a {
-    color: var(--base);
+    color: var(--text-muted);
     text-decoration: none;
-    margin: 8px 0;
-    font-weight: 300;
-    transition: all 300ms ease-in-out;
+    font-weight: 400;
+    transition: var(--transition);
+    position: relative;
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.form-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--secondary-color);
+    transition: var(--transition);
 }
 
 .form-links a:hover {
     color: var(--secondary-color);
-    transition: all 300ms ease-in-out;
+    text-decoration: none;
+}
+
+.form-links a:hover::after {
+    width: 100%;
 }
 
 /* Adaptaciones responsive */
 @media (max-width: 768px) {
     .register-container {
-        padding: 20px;
-        margin-top: 80px;
+        padding: 20px 15px;
+        min-height: calc(100vh - 80px);
     }
 
     .register-form-container {
-        padding: 25px;
+        padding: 30px 20px;
+    }
+
+    .register-form-container h2 {
+        font-size: 1.75rem;
+        margin-bottom: 25px;
     }
 }
 
-/* Estilos para multilanguage */
-.lang-en,
-.lang-es {
-    display: inline-block;
+/* Estilos para los mensajes de alerta */
+.alert {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    position: relative;
+    border: 1px solid transparent;
 }
 
-body[lang="en"] .lang-es {
-    display: none;
+.alert-success {
+    background-color: rgba(40, 167, 69, 0.1);
+    border-color: rgba(40, 167, 69, 0.2);
+    color: #28a745;
 }
 
-body[lang="es"] .lang-en {
-    display: none;
+.alert-error,
+.alert-danger {
+    background-color: rgba(220, 53, 69, 0.1);
+    border-color: rgba(220, 53, 69, 0.2);
+    color: #dc3545;
+}
+
+.alert-info {
+    background-color: rgba(23, 162, 184, 0.1);
+    border-color: rgba(23, 162, 184, 0.2);
+    color: #17a2b8;
+}
+
+.alert-warning {
+    background-color: rgba(255, 193, 7, 0.1);
+    border-color: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
 }

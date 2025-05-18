@@ -2,10 +2,13 @@
     --primary-color: #181818;
     --secondary-color: #00FFCE;
     --base: #ffffff;
+    --card-bg: rgba(40, 40, 40, 0.9);
+    --text-color: #e0e0e0;
+    --text-muted: #a0a0a0;
 }
 
 * {
-    font-family: montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 300;
     color: var(--base);
     list-style: none;
@@ -13,6 +16,46 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+
+/* Sobrescribir estilos de enlaces */
+a {
+    color: var(--secondary-color);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #00e5b8;
+    text-decoration: none;
+}
+
+/* Sobrescribir estilos de Bootstrap */
+.btn-link {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.btn-link:hover {
+    color: #00e5b8;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #00e5b8;
+    border-color: #00e5b8;
+    color: var(--primary-color);
+}
+
+:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.25rem rgba(0, 255, 206, 0.25);
 }
 
 html {
@@ -138,13 +181,39 @@ body {
 .translate-btn {
     color: var(--base);
     text-decoration: none;
-    font-weight: 200;
-    transition: all 400ms ease-in-out;
+    font-weight: 400;
+    transition: all 300ms ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .translate-btn:hover {
     color: var(--secondary-color);
-    transition: all 400ms ease-in-out;
+    border-color: var(--secondary-color);
+    background: rgba(0, 255, 206, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 10px rgba(0, 255, 206, 0.2);
+}
+
+.language-selector {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+/* Asegurarse de que solo se muestre el idioma activo */
+body[lang="en"] .lang-es,
+body[lang="es"] .lang-en {
+    display: none;
 }
 
 .container-one {

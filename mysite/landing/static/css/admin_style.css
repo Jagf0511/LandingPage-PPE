@@ -1,27 +1,50 @@
 /* Estilos para las páginas administrativas */
+:root {
+    --primary-color: #181818;
+    --secondary-color: #00FFCE;
+    --base: #ffffff;
+    --dark-bg: #1f1f1f;
+    --card-bg: #2a2a2a;
+    --text-color: #e0e0e0;
+    --text-muted: #a0a0a0;
+}
+
 body {
-    background-color: #f5f5f5;
+    background-color: var(--primary-color);
+    color: var(--text-color);
 }
 
 .card {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border: 1px solid #333;
+    background-color: var(--card-bg);
+    color: var(--text-color);
 }
 
 .card-header {
     font-weight: 500;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid #333;
 }
 
 /* Mejoras para formularios */
 .form-control {
     border-radius: 0.25rem;
     padding: 0.5rem 0.75rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: #333;
+    border: 1px solid #444;
+    color: var(--text-color);
 }
 
 .form-control:focus {
-    border-color: #00FFCE;
+    border-color: var(--secondary-color);
     box-shadow: 0 0 0 0.25rem rgba(0, 255, 206, 0.25);
+    background-color: #3a3a3a;
+}
+
+.form-label {
+    color: var(--text-muted);
 }
 
 textarea.form-control {
@@ -29,38 +52,53 @@ textarea.form-control {
 }
 
 /* Botones con estilo consistente */
-.btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+.btn {
+    transition: all 0.3s ease-in-out;
+    border: none;
+    font-weight: 500;
 }
 
-.btn-success {
-    background-color: #28a745;
-    border-color: #28a745;
+.btn-primary, .btn-success, .btn-info {
+    background-color: var(--secondary-color);
+    color: #000;
+}
+
+.btn-primary:hover, .btn-success:hover, .btn-info:hover {
+    background-color: #00e5b8;
+    transform: translateY(-1px);
 }
 
 .btn-warning {
     background-color: #ffc107;
-    border-color: #ffc107;
+    color: #000;
 }
 
 .btn-danger {
     background-color: #dc3545;
-    border-color: #dc3545;
-}
-
-.btn-info {
-    background-color: #17a2b8;
-    border-color: #17a2b8;
+    color: #fff;
 }
 
 /* Estilos para la tabla */
 .table {
-    background-color: white;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-color: #444;
 }
 
 .table th {
     font-weight: 600;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-color: #444;
+    color: var(--secondary-color);
+}
+
+.table td {
+    border-color: #444;
+    vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 255, 206, 0.1);
 }
 
 .badge {
@@ -70,7 +108,81 @@ textarea.form-control {
 
 /* Mejoras para la barra de navegación */
 .navbar {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: var(--primary-color) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid #333;
+}
+
+.navbar-brand, .nav-link {
+    color: var(--text-color) !important;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--secondary-color) !important;
+}
+
+/* Estilos para el footer */
+.footer {
+    background-color: var(--primary-color);
+    border-top: 1px solid #333;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+/* Ajustes para los modales */
+.modal-content {
+    background-color: var(--card-bg);
+    border: 1px solid #444;
+}
+
+.modal-header {
+    border-bottom: 1px solid #444;
+}
+
+.modal-footer {
+    border-top: 1px solid #444;
+}
+
+/* Ajustes para los dropdowns */
+.dropdown-menu {
+    background-color: var(--card-bg);
+    border: 1px solid #444;
+}
+
+.dropdown-item {
+    color: var(--text-color);
+}
+
+.dropdown-item:hover {
+    background-color: rgba(0, 255, 206, 0.1);
+    color: var(--secondary-color);
+}
+
+/* Ajustes para los alerts */
+.alert {
+    border: none;
+    color: #fff;
+}
+
+.alert-success {
+    background-color: rgba(40, 167, 69, 0.2);
+    border-left: 4px solid #28a745;
+}
+
+.alert-danger {
+    background-color: rgba(220, 53, 69, 0.2);
+    border-left: 4px solid #dc3545;
+}
+
+.alert-warning {
+    background-color: rgba(255, 193, 7, 0.2);
+    border-left: 4px solid #ffc107;
+    color: #ffc107;
+}
+
+.alert-info {
+    background-color: rgba(23, 162, 184, 0.2);
+    border-left: 4px solid #17a2b8;
 }
 
 /* Responsive */

@@ -56,14 +56,14 @@ document.addEventListener("DOMContentLoaded", function () {
         // Set initial state - check local storage or default to Spanish
         let currentLanguage = localStorage.getItem('currentLanguage') || 'es';
         document.documentElement.setAttribute('lang', currentLanguage);
-        translateBtn.textContent = currentLanguage === 'es' ? "English" : "Español";
+        translateBtn.textContent = currentLanguage === 'es' ? "EN" : "ES";
 
         // Translation function
         translateBtn.addEventListener("click", function () {
             if (currentLanguage === 'es') {
                 // Change to English
                 currentLanguage = 'en';
-                translateBtn.textContent = "Español";
+                translateBtn.textContent = "ES";
                 document.documentElement.setAttribute('lang', 'en');
 
                 // Hide Spanish elements
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 // Change to Spanish
                 currentLanguage = 'es';
-                translateBtn.textContent = "English";
+                translateBtn.textContent = "EN";
                 document.documentElement.setAttribute('lang', 'es');
 
                 // Hide English elements

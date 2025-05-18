@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
     <link rel="stylesheet" href="{% static 'css/admin_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -53,20 +54,26 @@
                 </ul>
                 <div class="d-flex align-items-center">
                     <a id="translate-btn" class="btn btn-sm btn-outline-light me-3" href="javascript:void(0);">
-                        <span class="lang-es">English</span>
-                        <span class="lang-en" style="display: none;">Español</span>
+                        <span class="lang-es">EN</span>
+                        <span class="lang-en" style="display: none;">ES</span>
                     </a>
+                    {% if user.is_authenticated %}
                     <span class="navbar-text me-3">
                         <span class="lang-es">Hola, {{ request.user.username }}</span>
                         <span class="lang-en" style="display: none;">Hi, {{ request.user.username }}</span>
                     </span>
-                    <form method="POST" action="{% url 'logout' %}">
+                    <form method="POST" action="{% url 'logout' %}" class="me-2">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-outline-light">
                             <span class="lang-es">Cerrar sesión</span>
                             <span class="lang-en" style="display: none;">Logout</span>
                         </button>
                     </form>
+                    {% endif %}
+                    <a href="{% url 'index' %}" class="btn btn-outline-light">
+                        <span class="lang-es">Volver al inicio</span>
+                        <span class="lang-en" style="display: none;">Back to home</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -111,11 +118,15 @@
             if (currentLanguage === 'es') {
                 document.querySelectorAll('.lang-es').forEach(el => el.style.display = 'inline-block');
                 document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
-                document.getElementById('translate-btn').innerHTML = 'English';
+                if (document.getElementById('translate-btn')) {
+                    document.getElementById('translate-btn').innerHTML = 'EN';
+                }
             } else {
                 document.querySelectorAll('.lang-es').forEach(el => el.style.display = 'none');
                 document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'inline-block');
-                document.getElementById('translate-btn').innerHTML = 'Español';
+                if (document.getElementById('translate-btn')) {
+                    document.getElementById('translate-btn').innerHTML = 'ES';
+                }
             }
             
             // Configurar el botón de traducción
@@ -132,11 +143,11 @@
                     if (newLang === 'es') {
                         document.querySelectorAll('.lang-es').forEach(el => el.style.display = 'inline-block');
                         document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
-                        this.innerHTML = 'English';
+                        if (this) this.innerHTML = 'EN';
                     } else {
                         document.querySelectorAll('.lang-es').forEach(el => el.style.display = 'none');
                         document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'inline-block');
-                        this.innerHTML = 'Español';
+                        if (this) this.innerHTML = 'ES';
                     }
                 });
             }
