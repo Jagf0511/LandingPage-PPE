@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Only apply scroll behavior if these elements exist
     if (nav && logo) {
         // Variables for scrolling behavior - using complete path for images
-        const logotipoNormal = "../static/Imgs/logos/logotipo_web.svg";
-        const logotipoScroll = "../static/Imgs/logos/iconweb.svg";
+        const logotipoNormal = "/static/Imgs/logos/logotipo_web.svg";
+        const logotipoScroll = "/static/Imgs/logos/iconweb.svg";
 
         // Scroll behavior
         window.addEventListener("scroll", function () {

@@ -1,147 +1,213 @@
-<!DOCTYPE html>
-<html lang="es" data-theme="light">
+{% extends 'admin_base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Elemento - Transport Service Medellin</title>
-    {% load static %}
-    <link rel="shortcut icon" href="{% static 'Imgs/logos/iconweb.svg' %}" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% block title %}
+    <span class="lang-es">Agregar Elemento - Transport Service Medellin</span>
+    <span class="lang-en" style="display: none;">Add Item - Transport Service Medellin</span>
+{% endblock %}
+
+{% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/dashboard_new.css' %}">
     <link rel="stylesheet" href="{% static 'css/agregar_elemento.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <style>        .lang-en, .lang-es {
-            display: inline-block;
+    <style>
+        .form-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .btn-back {
+            margin-bottom: 1.5rem;
+        }
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
         }
     </style>
-</head>
+{% endblock %}
 
-<body>
-    <div class="container mt-5 pt-5">
-        <div class="d-flex justify-content-end mb-3">            <form method="POST" action="{% url 'logout' %}" class="ms-2">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger">
-                    Cerrar sesión
-                </button>
-            </form>
+{% block content %}
+<div class="container mt-5 pt-5">
+    <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary btn-back">
+        <i class="bi bi-arrow-left"></i>
+        <span class="lang-es">Volver al panel</span>
+        <span class="lang-en" style="display: none;">Back to dashboard</span>
+    </a>
+    
+    <div class="form-container">
+        <h1 class="text-center mb-4">
+            <span class="lang-es">Agregar Nuevo Elemento</span>
+            <span class="lang-en" style="display: none;">Add New Item</span>
+        </h1>
+
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
         </div>
-        <div class="form-container">            <h1 class="text-center mb-4">
-                Agregar Nuevo Elemento
-            </h1>
+        {% endif %}
 
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                  <div class="mb-3">
-                    <label for="{{ form.nombre.id_for_label }}" class="form-label">
-                        <span class="lang-es">Nombre</span>
-                       
-                    </label>
-                    <input type="text" name="{{ form.nombre.name }}" id="{{ form.nombre.id_for_label }}" 
-                        class="form-control {% if form.nombre.errors %}is-invalid{% endif %}" 
-                        value="{{ form.nombre.value|default:'' }}" 
-                        placeholder="Ej: Tour a Guatapé / Excursión Santa Fe de Antioquia" required>
-                    {% if form.nombre.errors %}
-                    <div class="invalid-feedback">{{ form.nombre.errors }}</div>
-                    {% endif %}
+        <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+            {% csrf_token %}
+            
+            <!-- Nombre -->
+            <div class="mb-3">
+                <label for="{{ form.nombre.id_for_label }}" class="form-label">
+                    <span class="lang-es">Nombre</span>
+                    <span class="lang-en" style="display: none;">Name</span>
+                </label>
+                <input type="text" name="{{ form.nombre.name }}" id="{{ form.nombre.id_for_label }}" 
+                    class="form-control {% if form.nombre.errors %}is-invalid{% endif %}" 
+                    value="{{ form.nombre.value|default:'' }}" 
+                    placeholder="{% if request.LANGUAGE_CODE == 'es' %}Ej: Tour a Guatapé{% else %}E.g.: Guatapé Tour{% endif %}" 
+                    required>
+                {% if form.nombre.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.nombre.errors %}
+                        {{ error }}
+                    {% endfor %}
                 </div>
-                  <div class="mb-3">
-                    <label for="{{ form.descripcion.id_for_label }}" class="form-label">
-                        <span class="lang-es">Descripción</span>
-                       
-                    </label>
-                    <textarea name="{{ form.descripcion.name }}" id="{{ form.descripcion.id_for_label }}" 
-                        class="form-control {% if form.descripcion.errors %}is-invalid{% endif %}" 
-                        rows="4" 
-                        placeholder="Ej: Recorrido turístico que incluye transporte, guía y entradas a los principales atractivos turísticos de la región..." required>{{ form.descripcion.value|default:'' }}</textarea>
-                    {% if form.descripcion.errors %}
-                    <div class="invalid-feedback">{{ form.descripcion.errors }}</div>
-                    {% endif %}
+                {% endif %}
+            </div>
+            
+            <!-- Descripción -->
+            <div class="mb-3">
+                <label for="{{ form.descripcion.id_for_label }}" class="form-label">
+                    <span class="lang-es">Descripción</span>
+                    <span class="lang-en" style="display: none;">Description</span>
+                </label>
+                <textarea name="{{ form.descripcion.name }}" id="{{ form.descripcion.id_for_label }}" 
+                    class="form-control {% if form.descripcion.errors %}is-invalid{% endif %}" 
+                    rows="4" required>{% if form.descripcion.value %}{{ form.descripcion.value }}{% endif %}</textarea>
+                {% if form.descripcion.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.descripcion.errors %}
+                        {{ error }}
+                    {% endfor %}
                 </div>
-                
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="mb-3">
-                            <label for="{{ form.precio.id_for_label }}" class="form-label">
-                                <span class="lang-es">Precio</span>
-                                
-                            </label>                            <div class="input-group">
-                                <span class="input-group-text">$</span>
-                                <input type="number" name="{{ form.precio.name }}" id="{{ form.precio.id_for_label }}" 
-                                    class="form-control {% if form.precio.errors %}is-invalid{% endif %}" 
-                                    step="0.01" min="0" value="{{ form.precio.value|default:'0.00' }}"
-                                    placeholder="Ej: 150000.00" required>
-                            </div>
-                            {% if form.precio.errors %}
-                            <div class="invalid-feedback">{{ form.precio.errors }}</div>
-                            {% endif %}
+                {% endif %}
+            </div>
+            
+            <!-- Precio y Duración -->
+            <div class="row">
+                <!-- Precio -->
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="{{ form.precio.id_for_label }}" class="form-label">
+                            <span class="lang-es">Precio</span>
+                            <span class="lang-en" style="display: none;">Price</span>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="number" name="{{ form.precio.name }}" id="{{ form.precio.id_for_label }}" 
+                                class="form-control {% if form.precio.errors %}is-invalid{% endif %}" 
+                                step="0.01" min="0" value="{{ form.precio.value|default:'' }}"
+                                placeholder="{% if request.LANGUAGE_CODE == 'es' %}Ej: 150000.00{% else %}E.g.: 150000.00{% endif %}" 
+                                required>
                         </div>
-                    </div>
-                    
-                    <div class="col-md-4">
-                        <div class="mb-3">
-                            <label for="{{ form.duracion.id_for_label }}" class="form-label">
-                                <span class="lang-es">Duración (días)</span>
-                                
-                            </label>                            <input type="number" name="{{ form.duracion.name }}" id="{{ form.duracion.id_for_label }}" 
-                                class="form-control {% if form.duracion.errors %}is-invalid{% endif %}" 
-                                min="1" value="{{ form.duracion.value|default:'1' }}" 
-                                placeholder="Ej: 1, 2, 3..." required>
-                            {% if form.duracion.errors %}
-                            <div class="invalid-feedback">{{ form.duracion.errors }}</div>
-                            {% endif %}
+                        {% if form.precio.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.precio.errors %}
+                                {{ error }}
+                            {% endfor %}
                         </div>
-                    </div>
-                    
-                    <div class="col-md-4">
-                        <div class="mb-3">
-                            <label for="{{ form.ubicacion.id_for_label }}" class="form-label">
-                                <span class="lang-es">Ubicación</span>
-                            
-                            </label>                            <input type="text" name="{{ form.ubicacion.name }}" id="{{ form.ubicacion.id_for_label }}" 
-                                class="form-control {% if form.ubicacion.errors %}is-invalid{% endif %}" 
-                                value="{{ form.ubicacion.value|default:'' }}" 
-                                placeholder="Ej: Medellín, Guatapé, Jardín, Santa Fe de Antioquia" required>                            {% if form.ubicacion.errors %}
-                            <div class="invalid-feedback">{{ form.ubicacion.errors }}</div>
-                            {% endif %}
-                        </div>
+                        {% endif %}
                     </div>
                 </div>
                 
-                <div class="mb-3">
-                    <label for="{{ form.foto.id_for_label }}" class="form-label">
-                        <span class="lang-es">Foto</span>
-                    </label>
-                    <input type="file" name="{{ form.foto.name }}" id="{{ form.foto.id_for_label }}" 
-                        class="form-control {% if form.foto.errors %}is-invalid{% endif %}"
-                        accept="image/*">
-                    {% if form.foto.errors %}
-                    <div class="invalid-feedback">{{ form.foto.errors }}</div>
-                    {% endif %}
-                    <small class="form-text text-muted">
-                        <span class="lang-es">Sube una imagen para mostrar en la galería (opcional).</span>
-                    </small>
+                <!-- Duración -->
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="{{ form.duracion.id_for_label }}" class="form-label">
+                            <span class="lang-es">Duración (días)</span>
+                            <span class="lang-en" style="display: none;">Duration (days)</span>
+                        </label>
+                        <input type="number" name="{{ form.duracion.name }}" id="{{ form.duracion.id_for_label }}" 
+                            class="form-control {% if form.duracion.errors %}is-invalid{% endif %}" 
+                            min="1" value="{{ form.duracion.value|default:'1' }}" 
+                            placeholder="{% if request.LANGUAGE_CODE == 'es' %}Ej: 1, 2, 3...{% else %}E.g.: 1, 2, 3...{% endif %}" 
+                            required>
+                        {% if form.duracion.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.duracion.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
                 </div>
-                
-                <div class="d-flex justify-content-between mt-4"><a href="{% url 'dashboard' %}" class="btn btn-cancel">
-                        Cancelar
-                    </a>
-                    <button type="submit" class="btn btn-submit">
-                        Guardar Elemento
-                    </button>
+            </div>
+            
+            <!-- Ubicación -->
+            <div class="mb-3">
+                <label for="{{ form.ubicacion.id_for_label }}" class="form-label">
+                    <span class="lang-es">Ubicación</span>
+                    <span class="lang-en" style="display: none;">Location</span>
+                </label>
+                <input type="text" name="{{ form.ubicacion.name }}" id="{{ form.ubicacion.id_for_label }}" 
+                    class="form-control {% if form.ubicacion.errors %}is-invalid{% endif %}" 
+                    value="{{ form.ubicacion.value|default:'' }}" 
+                    placeholder="{% if request.LANGUAGE_CODE == 'es' %}Ej: Medellín, Guatapé{% else %}E.g.: Medellín, Guatapé{% endif %}" 
+                    required>
+                {% if form.ubicacion.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.ubicacion.errors %}
+                        {{ error }}
+                    {% endfor %}
                 </div>
-            </form>        </div>
+                {% endif %}
+            </div>
+            
+            <!-- Foto -->
+            <div class="mb-4">
+                <label for="{{ form.foto.id_for_label }}" class="form-label">
+                    <span class="lang-es">Imagen del elemento</span>
+                    <span class="lang-en" style="display: none;">Item Image</span>
+                </label>
+                <input type="file" name="{{ form.foto.name }}" id="{{ form.foto.id_for_label }}" 
+                    class="form-control {% if form.foto.errors %}is-invalid{% endif %}" 
+                    accept="image/*" required>
+                {% if form.foto.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.foto.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <div class="form-text">
+                    <span class="lang-es">Formatos aceptados: JPG, PNG, WEBP. Tamaño máximo: 5MB.</span>
+                    <span class="lang-en" style="display: none;">Accepted formats: JPG, PNG, WEBP. Max size: 5MB.</span>
+                </div>
+            </div>
+            
+            <!-- Botones de acción -->
+            <div class="form-actions">
+                <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">
+                    <span class="lang-es">Cancelar</span>
+                    <span class="lang-en" style="display: none;">Cancel</span>
+                </a>
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-save me-1"></i>
+                    <span class="lang-es">Guardar Elemento</span>
+                    <span class="lang-en" style="display: none;">Save Item</span>
+                </button>
+            </div>
+        </form>
     </div>
+</div>
 
-    <!-- Include Bootstrap JS and our custom scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <script src="{% static 'js/improved_translation.js' %}"></script>
+<!-- Include Bootstrap JS and our custom scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+<script src="{% static 'js/improved_translation.js' %}"></script>
 </body>
 
 </html>
+{% endblock %}

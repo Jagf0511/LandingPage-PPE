@@ -1,66 +1,115 @@
-{% extends 'dashboard.html' %}
+{% extends 'admin_base.html' %}
+
+{% block title %}
+    <span class="lang-es">Gestión de Usuarios</span>
+    <span class="lang-en" style="display: none;">User Management</span>
+{% endblock %}
 
 {% block content %}
-<h1 class="text-center mb-4">Gestión de Usuarios</h1>
+<div class="container mt-5 pt-5">
+    <h1 class="text-center mb-4">
+        <span class="lang-es">Gestión de Usuarios</span>
+        <span class="lang-en" style="display: none;">User Management</span>
+    </h1>
 
-{% if messages %}
-<div class="messages">
-    {% for message in messages %}
-    <div class="alert alert-{{ message.tags }}">
-        {{ message }}
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
-{% endif %}
+    {% endif %}
 
-<div class="card">
-    <div class="card-header bg-primary text-white">
-        <h4>Lista de Usuarios</h4>
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">
+                <span class="lang-es">Lista de Usuarios</span>
+                <span class="lang-en" style="display: none;">User List</span>
+            </h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>
+                                <span class="lang-es">Usuario</span>
+                                <span class="lang-en" style="display: none;">Username</span>
+                            </th>
+                            <th>Email</th>
+                            <th>
+                                <span class="lang-es">Tipo</span>
+                                <span class="lang-en" style="display: none;">Type</span>
+                            </th>
+                            <th>
+                                <span class="lang-es">Acciones</span>
+                                <span class="lang-en" style="display: none;">Actions</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                {% if user.is_superuser %}
+                                    <span class="badge bg-danger">
+                                        <span class="lang-es">Superusuario</span>
+                                        <span class="lang-en" style="display: none;">Superuser</span>
+                                    </span>
+                                {% elif admin_group in user.groups.all %}
+                                    <span class="badge bg-warning">
+                                        <span class="lang-es">Administrador</span>
+                                        <span class="lang-en" style="display: none;">Administrator</span>
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-secondary">
+                                        <span class="lang-es">Usuario normal</span>
+                                        <span class="lang-en" style="display: none;">Regular User</span>
+                                    </span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if not user.is_superuser %}
+                                <form method="post" action="{% url 'toggle_admin_rights' user.id %}" class="d-inline">
+                                    {% csrf_token %}
+                                    {% if admin_group in user.groups.all %}
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                                            <span class="lang-es">Quitar admin</span>
+                                            <span class="lang-en" style="display: none;">Remove admin</span>
+                                        </button>
+                                    {% else %}
+                                        <button type="submit" class="btn btn-outline-success btn-sm">
+                                            <span class="lang-es">Hacer admin</span>
+                                            <span class="lang-en" style="display: none;">Make admin</span>
+                                        </button>
+                                    {% endif %}
+                                </form>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center">
+                                <span class="lang-es">No hay usuarios registrados</span>
+                                <span class="lang-en" style="display: none;">No users found</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <div class="card-body">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Usuario</th>
-                    <th>Email</th>
-                    <th>Tipo</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for user in users %}
-                <tr>
-                    <td>{{ user.username }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>
-                        {% if user.is_superuser %}
-                            <span class="badge bg-danger">Superusuario</span>
-                        {% elif admin_group in user.groups.all %}
-                            <span class="badge bg-warning">Administrador</span>
-                        {% else %}
-                            <span class="badge bg-secondary">Usuario normal</span>
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if not user.is_superuser %}
-                        <form method="post" action="{% url 'toggle_admin_rights' user.id %}">
-                            {% csrf_token %}
-                            {% if admin_group in user.groups.all %}
-                                <button type="submit" class="btn btn-outline-danger btn-sm">Quitar permisos admin</button>
-                            {% else %}
-                                <button type="submit" class="btn btn-outline-success btn-sm">Hacer administrador</button>
-                            {% endif %}
-                        </form>
-                        {% endif %}
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
 
-<div class="mt-3">
-    <a href="{% url 'dashboard' %}" class="btn btn-secondary">Volver al Dashboard</a>
+    <div class="mt-3">
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary">
+            <span class="lang-es">Volver al Dashboard</span>
+            <span class="lang-en" style="display: none;">Back to Dashboard</span>
+        </a>
+    </div>
 </div>
 {% endblock %}
