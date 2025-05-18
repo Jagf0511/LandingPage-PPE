@@ -12,33 +12,50 @@
         <span class="lang-en" style="display: none;">Dashboard</span>
     </h1>
 
-        <!-- Indicador de tipo de usuario -->
-        <div class="alert {% if is_superuser %}alert-danger{% elif is_admin %}alert-warning{% else %}alert-secondary{% endif %} mb-3">
-            <strong class="lang-es">Tipo de usuario:</strong>
-            <strong class="lang-en" style="display: none;">User type:</strong>
+        <!-- Indicador de tipo de usuario mejorado -->
+        <div class="user-type-indicator {% if is_superuser %}user-type-superuser{% elif is_admin %}user-type-admin{% else %}user-type-normal{% endif %}">
+            <span class="badge">
+                {% if is_superuser %}
+                    <span class="lang-es">Superusuario</span>
+                    <span class="lang-en" style="display: none;">Superuser</span>
+                {% elif is_admin %}
+                    <span class="lang-es">Administrador</span>
+                    <span class="lang-en" style="display: none;">Administrator</span>
+                {% else %}
+                    <span class="lang-es">Usuario</span>
+                    <span class="lang-en" style="display: none;">User</span>
+                {% endif %}
+            </span>
             {% if is_superuser %}
-                <span class="lang-es">Superusuario (acceso completo)</span>
-                <span class="lang-en" style="display: none;">Superuser (full access)</span>
+                <span class="lang-es">Tienes acceso completo a todas las funcionalidades del sistema.</span>
+                <span class="lang-en" style="display: none;">You have full access to all system features.</span>
             {% elif is_admin %}
-                <span class="lang-es">Administrador (acceso CRUD y gestión de usuarios)</span>
-                <span class="lang-en" style="display: none;">Administrator (CRUD and user management)</span>
+                <span class="lang-es">Puedes gestionar elementos y usuarios del sistema.</span>
+                <span class="lang-en" style="display: none;">You can manage system items and users.</span>
             {% else %}
-                <span class="lang-es">Usuario normal (solo lectura)</span>
-                <span class="lang-en" style="display: none;">Regular user (read only)</span>
+                <span class="lang-es">Puedes ver los elementos pero no realizar modificaciones.</span>
+                <span class="lang-en" style="display: none;">You can view items but cannot make changes.</span>
             {% endif %}
-        </div>        <!-- Barra de búsqueda -->
-        <div class="row mb-3">
-            <div class="col-md-8">
-                <form action="{% url 'buscar_elementos' %}" method="GET" class="d-flex">
-                    <input type="text" name="q" id="searchInput" class="form-control" 
-                        placeholder="{% if request.LANGUAGE_CODE == 'es' %}Buscar elemento...{% else %}Search item...{% endif %}" 
-                        value="{{ query|default:'' }}">
-                    <button type="submit" id="searchButton" class="btn btn-primary ms-2">
-                        🔍 <span class="lang-es">Buscar</span>
-                        <span class="lang-en" style="display: none;">Search</span>
-                    </button>
-                </form>
-            </div>            <div class="col-md-4 d-flex justify-content-end">
+        </div>
+
+        <!-- Barra de búsqueda mejorada -->
+        <div class="search-container">
+            <form action="{% url 'buscar_elementos' %}" method="GET" class="w-100 d-flex">
+                <input type="text" 
+                       name="q" 
+                       id="searchInput" 
+                       class="form-control" 
+                       placeholder="{% if request.LANGUAGE_CODE == 'es' %}Buscar elemento...{% else %}Search item...{% endif %}" 
+                       value="{{ query|default:'' }}"
+                       aria-label="{% if request.LANGUAGE_CODE == 'es' %}Buscar elemento{% else %}Search item{% endif %}">
+                <button type="submit" id="searchButton">
+                    <span class="lang-es">BUSCAR</span>
+                    <span class="lang-en" style="display: none;">SEARCH</span>
+                </button>
+            </form>
+        </div>
+        
+        <div class="row mb-4">            <div class="col-md-4 d-flex justify-content-end">
                 {% if is_admin %}
                 <a href="{% url 'agregar_elemento' %}" class="btn btn-success ms-2">
                     ➕ <span class="lang-es">Agregar Elemento</span>
@@ -51,13 +68,7 @@
                     <span class="lang-en" style="display: none;">Manage Users</span>
                 </a>
                 {% endif %}
-                <form method="POST" action="{% url 'logout' %}" class="ms-2">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger">
-                        <span class="lang-es">Cerrar sesión</span>
-                        <span class="lang-en" style="display: none;">Logout</span>
-                    </button>
-                </form>
+
             </div>
         </div>
 
