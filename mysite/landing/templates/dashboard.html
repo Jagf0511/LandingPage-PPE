@@ -138,6 +138,87 @@
         </tbody>
             </table>
         </div>
+        
+        <!-- Controles de paginación -->
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <!-- Selector de elementos por página -->
+                <form method="get" class="d-inline-flex align-items-center">
+                    <input type="hidden" name="q" value="{{ query|default:'' }}">
+                    <label for="per_page" class="me-2">Mostrar:</label>
+                    <select name="per_page" id="per_page" class="form-select form-select-sm" style="width: auto;" onchange="this.form.submit()">
+                        {% for opcion in opciones_por_pagina %}
+                            <option value="{{ opcion }}" {% if elementos_por_pagina == opcion %}selected{% endif %}>{{ opcion }}</option>
+                        {% endfor %}
+                    </select>
+                    <span class="ms-2">elementos por página</span>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <!-- Navegación de paginación -->
+                {% if elementos.has_other_pages %}
+                <nav aria-label="Navegación de páginas" class="float-md-end">
+                    <ul class="pagination pagination-sm mb-0">
+                        {% if elementos.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1{% if query %}&q={{ query }}{% endif %}{% if elementos_por_pagina != 10 %}&per_page={{ elementos_por_pagina }}{% endif %}" aria-label="Primera">
+                                    <span aria-hidden="true">&laquo;&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ elementos.previous_page_number }}{% if query %}&q={{ query }}{% endif %}{% if elementos_por_pagina != 10 %}&per_page={{ elementos_por_pagina }}{% endif %}" aria-label="Anterior">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <span class="page-link">&laquo;&laquo;</span>
+                            </li>
+                            <li class="page-item disabled">
+                                <span class="page-link">&laquo;</span>
+                            </li>
+                        {% endif %}
+                        
+                        {% for i in elementos.paginator.page_range %}
+                            {% if elementos.number == i %}
+                                <li class="page-item active">
+                                    <span class="page-link">{{ i }} <span class="sr-only">(actual)</span></span>
+                                </li>
+                            {% elif i > elementos.number|add:'-3' and i < elementos.number|add:'3' %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ i }}{% if query %}&q={{ query }}{% endif %}{% if elementos_por_pagina != 10 %}&per_page={{ elementos_por_pagina }}{% endif %}">{{ i }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if elementos.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ elementos.next_page_number }}{% if query %}&q={{ query }}{% endif %}{% if elementos_por_pagina != 10 %}&per_page={{ elementos_por_pagina }}{% endif %}" aria-label="Siguiente">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ elementos.paginator.num_pages }}{% if query %}&q={{ query }}{% endif %}{% if elementos_por_pagina != 10 %}&per_page={{ elementos_por_pagina }}{% endif %}" aria-label="Última">
+                                    <span aria-hidden="true">&raquo;&raquo;</span>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <span class="page-link">&raquo;</span>
+                            </li>
+                            <li class="page-item disabled">
+                                <span class="page-link">&raquo;&raquo;</span>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="mt-2 text-muted small">
+            Mostrando {{ elementos.start_index }} a {{ elementos.end_index }} de {{ elementos.paginator.count }} elementos
+        </div>
     </div>
     {% endblock %}
 </div>

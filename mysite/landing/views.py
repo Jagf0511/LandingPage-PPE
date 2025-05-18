@@ -4,11 +4,11 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.db import models
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Elemento 
 from .forms import ElementoForm, CustomUserCreationForm
 from .decorators import superuser_required, admin_required, normal_user_required
 import requests
-from django.db import models
 
 def index(request):
     return render(request, 'index.html')
@@ -31,15 +31,40 @@ def register(request):
 
 @normal_user_required
 def dashboard(request):
-    elementos = Elemento.objects.all()
+    # Obtener el número de elementos por página (por defecto 10)
+    elementos_por_pagina = int(request.GET.get('per_page', 10))
+    
+    # Obtener todos los elementos ordenados por ID
+    elementos_lista = Elemento.objects.all().order_by('id')
+    
+    # Crear el objeto paginador
+    paginator = Paginator(elementos_lista, elementos_por_pagina)
+    
+    # Obtener el número de página de la URL
+    page = request.GET.get('page')
+    
+    try:
+        elementos = paginator.page(page)
+    except PageNotAnInteger:
+        # Si la página no es un entero, mostrar la primera página
+        elementos = paginator.page(1)
+    except EmptyPage:
+        # Si la página está fuera de rango, mostrar la última página
+        elementos = paginator.page(paginator.num_pages)
+    
     # Determinar qué tipo de usuario es para mostrar opciones correspondientes
     is_admin = request.user.is_superuser or request.user.groups.filter(name='Administradores').exists()
     is_superuser = request.user.is_superuser
     
+    # Opciones de elementos por página
+    opciones_por_pagina = [10, 25, 50, 100]
+    
     context = {
         'elementos': elementos,
         'is_admin': is_admin,
-        'is_superuser': is_superuser
+        'is_superuser': is_superuser,
+        'opciones_por_pagina': opciones_por_pagina,
+        'elementos_por_pagina': elementos_por_pagina
     }
     return render(request, 'dashboard.html', context)
 
@@ -125,24 +150,51 @@ def toggle_admin_rights(request, user_id):
 def buscar_elementos(request):
     """Vista para búsqueda de elementos (accesible para todos los usuarios)"""
     query = request.GET.get('q', '')
-    elementos = Elemento.objects.all()
+    # Obtener el número de elementos por página (por defecto 10)
+    elementos_por_pagina = int(request.GET.get('per_page', 10))
+    
+    # Obtener los elementos filtrados por la búsqueda
+    elementos_lista = Elemento.objects.all()
     
     if query:
-        elementos = elementos.filter(
+        elementos_lista = elementos_lista.filter(
             models.Q(nombre__icontains=query) | 
             models.Q(descripcion__icontains=query) |
             models.Q(ubicacion__icontains=query)
         )
     
+    # Ordenar los elementos por ID
+    elementos_lista = elementos_lista.order_by('id')
+    
+    # Crear el objeto paginador
+    paginator = Paginator(elementos_lista, elementos_por_pagina)
+    
+    # Obtener el número de página de la URL
+    page = request.GET.get('page')
+    
+    try:
+        elementos = paginator.page(page)
+    except PageNotAnInteger:
+        # Si la página no es un entero, mostrar la primera página
+        elementos = paginator.page(1)
+    except EmptyPage:
+        # Si la página está fuera de rango, mostrar la última página
+        elementos = paginator.page(paginator.num_pages)
+    
     # Determinar qué tipo de usuario es para mostrar opciones correspondientes
     is_admin = request.user.is_superuser or request.user.groups.filter(name='Administradores').exists()
     is_superuser = request.user.is_superuser
+    
+    # Opciones de elementos por página
+    opciones_por_pagina = [10, 25, 50, 100]
     
     context = {
         'elementos': elementos,
         'is_admin': is_admin,
         'is_superuser': is_superuser,
-        'query': query
+        'query': query,
+        'opciones_por_pagina': opciones_por_pagina,
+        'elementos_por_pagina': elementos_por_pagina
     }
     return render(request, 'dashboard.html', context)
 
