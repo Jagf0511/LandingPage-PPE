@@ -99,12 +99,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Initialize - apply saved language preference
         if (currentLanguage === 'es') {
+            // Show Spanish, hide English by default
+            document.querySelectorAll('.lang-es').forEach(el => {
+                el.style.display = 'inline-block';
+            });
             document.querySelectorAll('.lang-en').forEach(el => {
                 el.style.display = 'none';
             });
         } else {
+            // Show English, hide Spanish by default
             document.querySelectorAll('.lang-es').forEach(el => {
                 el.style.display = 'none';
+            });
+            document.querySelectorAll('.lang-en').forEach(el => {
+                el.style.display = 'inline-block';
             });
         }
         console.log('Translation initialized with language:', currentLanguage);
