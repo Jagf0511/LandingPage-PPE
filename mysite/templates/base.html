@@ -25,61 +25,77 @@
 
 <body>
     <header>
-        <nav class="navigation">
-            <div class="wrap-nav">
-                <div class="social-list">
+        <nav class="navbar navbar-expand-lg navigation">
+            <div class="container-fluid wrap-nav">
+                <div class="social-list me-auto">
                     <a class="logowpp" target="_blank" href="https://wa.me/573246281456"><img src="{% static 'Imgs/logos/wpp-03.svg' %}" alt="WhatsApp"></a>
                     <a class="fb" target="_blank" href="https://www.facebook.com/profile.php?id=100089531658354"><img src="{% static 'Imgs/logos/facebook-04.svg' %}" alt="Facebook"></a>
                     <a class="ig" target="_blank" href="https://www.instagram.com/transportservice_medellin/"><img src="{% static 'Imgs/logos/instagram-01.svg' %}" alt="Instagram"></a>
                 </div>
-                <a href="{% url 'index' %}"><img class="logo" src="{% static 'Imgs/logos/logotipo_web.svg' %}" alt="Logotipo Transport Service Medellin"></a>                
-                <div class="list-nav">                    
-                    <a class="list" href="{% url 'index' %}">
-                        <span class="lang-es">Inicio</span>
-                        <span class="lang-en">Home</span>
-                    </a>
-                    <a class="list" href="{% url 'index' %}#about-us">
-                        <span class="lang-es">Sobre nosotros</span>
-                        <span class="lang-en">About us</span>
-                    </a>
-                    <a class="list" target="_blank" href="https://drive.google.com/file/d/1MZFcI5pwCUe6oWQOEQRYkOdcMfsOj6dU/view?usp=sharing">Brochure</a>
-                    <div class="language-selector">
-                        <a id="translate-btn" class="list translate-btn" href="javascript:void(0);" title="Change language">
-                            <span class="lang-es">ES</span>
-                            <span class="lang-en">EN</span>
-                        </a>
-                    </div>
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'dashboard' %}" class="login_btn">
-                            <i class="fas fa-tachometer-alt"></i> Dashboard
-                        </a>
-                        <form action="{% url 'logout' %}" method="post" class="d-inline">
-                            {% csrf_token %}
-                            <button type="submit" class="login_btn" style="background: none; border: 2px solid #00FFCE; color: #00FFCE; cursor: pointer; font: inherit; padding: 6px; border-radius: 12px; font-weight: 600; transition: all 300ms ease-in-out; display: inline-flex; align-items: center; gap: 5px;">
-                                <i class="fas fa-sign-out-alt"></i> <span class="lang-es">Cerrar sesión</span><span class="lang-en">Logout</span>
-                            </button>
-                        </form>
-                    {% else %}
-                        <a href="{% url 'login' %}" class="login_btn">
-                            <i class="fas fa-sign-in-alt"></i> <span class="lang-es">Iniciar sesión</span>
-                            <span class="lang-en">Login</span>
-                        </a>
-                        <a class="register_btn" href="{% url 'register' %}">
-                            <i class="fas fa-user-plus"></i> <span class="lang-es">Registrarse</span>
-                            <span class="lang-en">Sign up</span>
-                        </a>
-                    {% endif %}
+                
+                <a href="{% url 'index' %}" class="navbar-brand mx-auto mx-lg-0">
+                    <img class="logo" src="{% static 'Imgs/logos/logotipo_web.svg' %}" alt="Logotipo Transport Service Medellin">
+                </a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        <li class="nav-item">
+                            <a class="nav-link list" href="{% url 'index' %}">
+                                <span class="lang-es">Inicio</span>
+                                <span class="lang-en">Home</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link list" href="{% url 'index' %}#about-us">
+                                <span class="lang-es">Sobre nosotros</span>
+                                <span class="lang-en">About us</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link list" target="_blank" href="https://drive.google.com/file/d/1MZFcI5pwCUe6oWQOEQRYkOdcMfsOj6dU/view?usp=sharing">
+                                Brochure
+                            </a>
+                        </li>
+                        <li class="nav-item ms-lg-2">
+                            <a id="translate-btn" class="btn btn-sm btn-outline-light" href="javascript:void(0);" title="Change language">
+                                <span class="lang-es">EN</span>
+                                <span class="lang-en" style="display: none;">ES</span>
+                            </a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item ms-lg-2">
+                            <a href="{% url 'dashboard' %}" class="nav-link login_btn">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item ms-lg-2">
+                            <form action="{% url 'logout' %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="nav-link login_btn" style="background: none; border: none; color: var(--secondary-color); cursor: pointer; font: inherit; font-weight: 500; transition: all 300ms ease-in-out; display: flex; align-items: center; gap: 5px; padding: 0.5rem 1rem;">
+                                    <i class="fas fa-sign-out-alt"></i> <span class="lang-es">Cerrar sesión</span><span class="lang-en">Logout</span>
+                                </button>
+                            </form>
+                        </li>
+                        {% else %}
+                        <li class="nav-item ms-lg-2">
+                            <a href="{% url 'login' %}" class="nav-link login_btn">
+                                <i class="fas fa-sign-in-alt"></i> <span class="lang-es">Iniciar sesión</span>
+                                <span class="lang-en">Login</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ms-lg-2">
+                            <a class="nav-link register_btn" href="{% url 'register' %}" style="padding: 0.5rem 1rem;">
+                                <i class="fas fa-user-plus"></i> <span class="lang-es">Registrarse</span>
+                                <span class="lang-en">Sign up</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
                 </div>
-                <button class="abrir visible">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-                    </svg>
-                </button>
-                <button class="cerrar">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-x-circle-fill" fill="currentColor" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8 7.293z"/>
-                    </svg>
-                </button>
             </div>
         </nav>
     </header>
@@ -141,23 +157,56 @@
     {% block extra_js %}{% endblock %}
     
     <script>
-        // Script para el menú móvil
+        // Script para el cambio de idioma
         document.addEventListener('DOMContentLoaded', function() {
-            const abrir = document.querySelector('.abrir');
-            const cerrar = document.querySelector('.cerrar');
-            const nav = document.querySelector('.list-nav');
-
-            abrir.addEventListener('click', function() {
-                nav.classList.add('visible');
-                abrir.classList.remove('visible');
-                cerrar.classList.add('visible');
-            });
-
-            cerrar.addEventListener('click', function() {
-                nav.classList.remove('visible');
-                cerrar.classList.remove('visible');
-                abrir.classList.add('visible');
-            });
+            
+            // Función para cambiar el idioma
+            function updateLanguage(lang) {
+                // Actualizar el idioma en el almacenamiento local
+                localStorage.setItem('currentLanguage', lang);
+                
+                // Actualizar la interfaz
+                if (lang === 'es') {
+                    document.querySelectorAll('.lang-es').forEach(el => el.style.display = 'inline-block');
+                    document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
+                    const translateBtn = document.getElementById('translate-btn');
+                    if (translateBtn) {
+                        translateBtn.querySelector('.lang-es').textContent = 'EN';
+                        translateBtn.querySelector('.lang-en').textContent = 'ES';
+                    }
+                } else {
+                    document.querySelectorAll('.lang-es').forEach(el => el.style.display = 'none');
+                    document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'inline-block');
+                    const translateBtn = document.getElementById('translate-btn');
+                    if (translateBtn) {
+                        translateBtn.querySelector('.lang-es').textContent = 'EN';
+                        translateBtn.querySelector('.lang-en').textContent = 'ES';
+                    }
+                }
+            }
+            
+            // Inicializar el estado del idioma
+            let currentLanguage = localStorage.getItem('currentLanguage') || 'es';
+            
+            // Si es la primera vez, establecer español como predeterminado
+            if (!localStorage.getItem('currentLanguage')) {
+                currentLanguage = 'es';
+                localStorage.setItem('currentLanguage', currentLanguage);
+            }
+            
+            // Aplicar el idioma actual al cargar la página
+            updateLanguage(currentLanguage);
+            
+            // Configurar el botón de traducción
+            const translateBtn = document.getElementById('translate-btn');
+            if (translateBtn) {
+                translateBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    currentLanguage = localStorage.getItem('currentLanguage') || 'es';
+                    const newLang = currentLanguage === 'es' ? 'en' : 'es';
+                    updateLanguage(newLang);
+                });
+            }
         });
     </script>
 </body>
