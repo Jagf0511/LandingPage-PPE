@@ -1,0 +1,367 @@
+/* Estilos generales del panel de administración */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Encabezado */
+#header {
+    background: linear-gradient(135deg, #4a6bdf 0%, #1e3c72 100%);
+    color: white;
+    padding: 15px 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#branding h1 {
+    color: white;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+/* Barra lateral */
+#content {
+    margin: 20px 20px 20px 250px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#content-main {
+    width: 100%;
+}
+
+/* Tablas */
+#changelist table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#changelist table th, #changelist table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eaeaea;
+}
+
+#changelist table th {
+    background-color: #f5f7fa;
+    font-weight: 600;
+    color: #4a5568;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+#changelist table tr:hover {
+    background-color: #f8fafc;
+}
+
+/* Botones */
+.button, input[type="submit"], input[type="button"], .submit-row input, a.button {
+    background: #4a6bdf;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.button:hover, input[type="submit"]:hover, input[type="button"]:hover, .submit-row input:hover, a.button:hover {
+    background: #3a56c7;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.button.default, input[type="submit"].default, .submit-row input.default {
+    background: #10b981;
+}
+
+.button.default:hover, input[type="submit"].default:hover, .submit-row input.default:hover {
+    background: #0d9f6e;
+}
+
+/* Grupos de botones */
+.button-group {
+    display: flex;
+    gap: 5px;
+}
+
+/* Formularios */
+fieldset {
+    border: 1px solid #eaeaea;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: #fff;
+}
+
+fieldset h2 {
+    color: #4a5568;
+    font-size: 1.2rem;
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+/* Campos de formulario */
+input[type="text"], input[type="password"], input[type="email"], input[type="number"],
+input[type="url"], input[type="tel"], select, textarea, .vTextField {
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    padding: 8px 12px;
+    width: 100%;
+    max-width: 500px;
+    font-size: 0.95rem;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus,
+input[type="number"]:focus, input[type="url"]:focus, input[type="tel"]:focus,
+select:focus, textarea:focus, .vTextField:focus {
+    border-color: #4a6bdf;
+    box-shadow: 0 0 0 2px rgba(74, 107, 223, 0.2);
+    outline: none;
+}
+
+/* Mensajes */
+.messagelist li {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.messagelist .success {
+    background-color: #d1fae5;
+    color: #065f46;
+    border-left: 4px solid #10b981;
+}
+
+.messagelist .warning {
+    background-color: #fef3c7;
+    color: #92400e;
+    border-left: 4px solid #f59e0b;
+}
+
+.messagelist .error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border-left: 4px solid #ef4444;
+}
+
+/* Vista previa de imágenes */
+.img-preview {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 4px;
+    border: 1px solid #eaeaea;
+    margin-top: 10px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    #content {
+        margin-left: 20px;
+    }
+    
+    .dashboard #content {
+        width: auto;
+    }
+}
+
+/* Personalización de la barra lateral */
+#nav-sidebar {
+    background: #2d3748;
+    width: 220px;
+    padding-top: 20px;
+}
+
+#nav-sidebar .module h2, #nav-sidebar .module caption {
+    color: #cbd5e0;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 15px;
+    margin: 0;
+    border-bottom: 1px solid #4a5568;
+}
+
+#nav-sidebar .module {
+    background: transparent;
+    margin-bottom: 20px;
+}
+
+#nav-sidebar .module a {
+    color: #e2e8f0;
+    padding: 8px 20px;
+    display: block;
+    transition: all 0.2s ease;
+}
+
+#nav-sidebar .module a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding-left: 25px;
+}
+
+#nav-sidebar .module a:active, #nav-sidebar .module a:focus {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+/* Mejoras en los filtros */
+.selector {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.selector h2 {
+    margin-top: 0;
+    color: #4a5568;
+    font-size: 1rem;
+}
+
+/* Mejoras en la paginación */
+.paginator {
+    margin: 20px 0;
+    padding: 10px 0;
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.paginator a, .paginator .this-page {
+    padding: 5px 10px;
+    margin: 0 2px;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.paginator a {
+    color: #4a6bdf;
+}
+
+.paginator a:hover {
+    background: #edf2f7;
+}
+
+.paginator .this-page {
+    background: #4a6bdf;
+    color: white;
+}
+
+/* Mejoras en los mensajes de ayuda */
+.help {
+    color: #718096;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: block;
+}
+
+/* Mejoras en los campos de búsqueda */
+#searchbar {
+    margin-bottom: 20px;
+}
+
+#searchbar input[type="text"] {
+    max-width: 300px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #d1d5db;
+}
+
+#searchbar input[type="submit"] {
+    margin-left: 10px;
+    padding: 8px 15px;
+}
+
+/* Mejoras en los tabs */
+.tabular table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.tabular table th, .tabular table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.tabular table th {
+    background-color: #f5f7fa;
+    font-weight: 600;
+    color: #4a5568;
+}
+
+/* Mejoras en los mensajes de error */
+.errornote {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    display: block;
+    border-left: 4px solid #ef4444;
+}
+
+/* Mejoras en los checkboxes y radios */
+input[type="checkbox"], input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* Mejoras en los select múltiples */
+select[multiple] {
+    min-height: 150px;
+}
+
+/* Mejoras en los campos de fecha/hora */
+.datetime {
+    margin-bottom: 15px;
+}
+
+.datetime label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #4a5568;
+}
+
+/* Mejoras en los mensajes de éxito */
+.success {
+    color: #065f46;
+    background-color: #d1fae5;
+    border-left: 4px solid #10b981;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+/* Mejoras en los tooltips */
+.help-tooltip {
+    color: #6b7280;
+    cursor: help;
+    margin-left: 5px;
+}
+
+/* Mejoras en los campos de archivo */
+.file-upload {
+    margin-top: 10px;
+}
+
+.file-upload a {
+    color: #4a6bdf;
+    text-decoration: none;
+}
+
+.file-upload a:hover {
+    text-decoration: underline;
+}

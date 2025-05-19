@@ -1,0 +1,39 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}">
+        <img src="{% static 'img/logo.png' %}" alt="Logo" height="40" style="vertical-align: middle; margin-right: 10px;">
+        {{ site_header|default:_('Django administration') }}
+    </a>
+</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'admin/css/admin-styles.css' %}">
+{% endblock %}
+
+{% block footer %}
+{{ block.super }}
+<script>
+// Scripts personalizados para el admin
+(function($) {
+    $(document).ready(function() {
+        // Mejoras en la interfaz
+        $('input[type="submit"], .button, button').addClass('button');
+        
+        // Mejoras en los tooltips
+        $('.help-tooltip').tooltip();
+        
+        // Mejoras en las tablas
+        $('table').addClass('table');
+    });
+})(django.jQuery);
+</script>
+{% endblock %}

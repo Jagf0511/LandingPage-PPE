@@ -1,0 +1,133 @@
+{% extends "admin/index.html" %}
+{% load i18n static %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="dashboard-header">
+        <h1>{% trans 'Panel de Control' %}</h1>
+        <p class="welcome">Bienvenido, {{ user.get_username }}. Aquí puedes gestionar todos los aspectos de tu sitio web.</p>
+    </div>
+
+    <div class="dashboard-content">
+        {% if app_list %}
+            {% for app in app_list %}
+                <div class="app-{{ app.app_label }} module">
+                    <table class="table">
+                        <caption>
+                            <a href="{{ app.app_url }}" class="section" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">
+                                {{ app.name }}
+                            </a>
+                        </caption>
+                        {% for model in app.models %}
+                            <tr class="model-{{ model.object_name|lower }}">
+                                {% if model.admin_url %}
+                                    <th scope="row">
+                                        <a href="{{ model.admin_url }}">
+                                            {{ model.name }}
+                                        </a>
+                                    </th>
+                                {% else %}
+                                    <th scope="row">{{ model.name }}</th>
+                                {% endif %}
+
+                                {% if model.add_url %}
+                                    <td>
+                                        <a href="{{ model.add_url }}" class="addlink">
+                                            {% trans 'Añadir' %}
+                                        </a>
+                                    </td>
+                                {% else %}
+                                    <td>&nbsp;</td>
+                                {% endif %}
+
+                                {% if model.admin_url %}
+                                    <td>
+                                        <a href="{{ model.admin_url }}" class="viewlink">
+                                            {% trans 'Ver' %}
+                                        </a>
+                                    </td>
+                                {% else %}
+                                    <td>&nbsp;</td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>{% trans "No tienes permiso para ver o editar nada." %}</p>
+        {% endif %}
+    </div>
+
+    <!-- Sección de estadísticas rápidas -->
+    <div class="dashboard-stats">
+        <h2>Estadísticas Rápidas</h2>
+        <div class="stats-grid">
+            <div class="stat-box">
+                <h3>Usuarios</h3>
+                <p class="stat-number">{{ user_count|default:'0' }}</p>
+            </div>
+            <div class="stat-box">
+                <h3>Comentarios</h3>
+                <p class="stat-number">{{ comment_count|default:'0' }}</p>
+                <a href="/admin/comentarios/" class="button">Ver comentarios</a>
+            </div>
+            <div class="stat-box">
+                <h3>Elementos</h3>
+                <p class="stat-number">{{ element_count|default:'0' }}</p>
+                <a href="/admin/landing/" class="button">Ver elementos</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Acciones rápidas -->
+    <div class="quick-actions">
+        <h2>Acciones Rápidas</h2>
+        <div class="action-buttons">
+            <a href="/admin/comentarios/comentario/add/" class="button">
+                <i class="icon-add"></i> Nuevo Comentario
+            </a>
+            <a href="/admin/landing/elemento/add/" class="button">
+                <i class="icon-add"></i> Nuevo Elemento
+            </a>
+            <a href="/admin/auth/user/add/" class="button">
+                <i class="icon-add"></i> Nuevo Usuario
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<div id="content-related">
+    <div class="module" id="recent-actions-module">
+        <h2>{% trans 'Acciones recientes' %}</h2>
+        <h3>{% trans 'Mis acciones' %}</h3>
+        {% load log %}
+        {% get_admin_log 10 as admin_log for_user user %}
+        {% if not admin_log %}
+            <p>{% trans 'No hay acciones recientes' %}</p>
+        {% else %}
+            <ul class="actionlist">
+                {% for entry in admin_log %}
+                    <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+                        {% if entry.is_deletion or not entry.get_admin_url %}
+                            {{ entry.object_repr }}
+                        {% else %}
+                            <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                        {% endif %}
+                        <br/>
+                        {% if entry.content_type %}
+                            <span class="mini quiet">
+                                {% filter capfirst %}{{ entry.content_type.name }}{% endfilter %}
+                            </span>
+                        {% else %}
+                            <span class="mini quiet">{% trans 'Unknown content' %}</span>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

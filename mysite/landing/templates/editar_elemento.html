@@ -13,38 +13,114 @@
         .form-container {
             max-width: 800px;
             margin: 2rem auto;
-            padding: 2rem;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            background: rgba(30, 30, 30, 0.9);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+            backdrop-filter: blur(10px);
+            color: #ffffff;
         }
         .btn-back {
             margin-bottom: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #00FFCE;
+            transition: all 0.3s ease;
+        }
+        .btn-back:hover {
+            background: rgba(0, 255, 206, 0.1);
+            border-color: #00FFCE;
         }
         .form-actions {
             display: flex;
             justify-content: space-between;
             margin-top: 2rem;
+            gap: 1rem;
         }
         .current-image {
-            max-width: 200px;
-            margin-top: 0.5rem;
-            border-radius: 4px;
-            border: 1px solid #dee2e6;
+            max-width: 100%;
+            height: auto;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border: 2px solid rgba(0, 255, 206, 0.3);
+            transition: transform 0.3s ease;
+        }
+        .current-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(0, 255, 206, 0.2);
+        }
+        .form-label {
+            color: #00FFCE;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        .form-control, .form-select {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus, .form-select:focus {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: #00FFCE;
+            color: #fff;
+            box-shadow: 0 0 0 0.25rem rgba(0, 255, 206, 0.25);
+        }
+        .btn-primary {
+            background-color: #00FFCE;
+            border: none;
+            color: #000;
+            font-weight: 600;
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #00e6b8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 255, 206, 0.3);
+        }
+        .btn-outline-secondary {
+            color: #00FFCE;
+            border-color: #00FFCE;
+            background: transparent;
+        }
+        .btn-outline-secondary:hover {
+            background: rgba(0, 255, 206, 0.1);
+            color: #00FFCE;
+        }
+        .invalid-feedback {
+            color: #ff6b6b;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+        h1 {
+            color: #00FFCE;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .form-text {
+            color: #a0a0a0;
+            font-size: 0.85rem;
         }
     </style>
 {% endblock %}
 
 {% block content %}
 <div class="container mt-5 pt-5">
-    <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary btn-back">
-        <i class="bi bi-arrow-left"></i>
-        <span class="lang-es">Volver al panel</span>
-        <span class="lang-en" style="display: none;">Back to dashboard</span>
+    <a href="{% url 'dashboard' %}" class="btn btn-back">
+        <i class="fas fa-arrow-left"></i>
+        <span class="lang-es"> Volver al panel</span>
+        <span class="lang-en" style="display: none;"> Back to dashboard</span>
     </a>
     
     <div class="form-container">
-        <h1 class="text-center mb-4">
+        <h1 class="text-center">
+            <i class="fas fa-edit me-2"></i>
             <span class="lang-es">Editar Elemento</span>
             <span class="lang-en" style="display: none;">Edit Item</span>
         </h1>
@@ -210,15 +286,16 @@
             
             <!-- Botones de acción -->
             <div class="form-actions">
-                <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">
-                    <span class="lang-es">Cancelar</span>
-                    <span class="lang-en" style="display: none;">Cancel</span>
-                </a>
                 <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-save me-1"></i>
+                    <i class="fas fa-save me-2"></i>
                     <span class="lang-es">Guardar Cambios</span>
                     <span class="lang-en" style="display: none;">Save Changes</span>
                 </button>
+                <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">
+                    <i class="fas fa-times me-2"></i>
+                    <span class="lang-es">Cancelar</span>
+                    <span class="lang-en" style="display: none;">Cancel</span>
+                </a>
             </div>
         </form>
     </div>
