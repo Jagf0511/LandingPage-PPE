@@ -306,7 +306,7 @@ body[lang="es"] .lang-en {
 .gallery {
     height: auto;
     width: 100%;
-    background-color: #00FFCE;
+    background-color: transparent;
 }
 
 .gallery h2 {
@@ -315,6 +315,7 @@ body[lang="es"] .lang-en {
     align-items: center;
     width: 100%;
     padding-block: 30px;
+    color: white;
 }
 
 /* Footer Styles */

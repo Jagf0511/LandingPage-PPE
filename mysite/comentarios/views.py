@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
+from django.http import JsonResponse
 from .models import Comentario
 from .forms import ComentarioForm
 
@@ -19,12 +20,41 @@ def agregar_comentario(request):
             comentario = form.save(commit=False)
             comentario.usuario = request.user
             comentario.save()
+            
+            # Si es una petición AJAX, devolver una respuesta JSON
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({
+                    'success': True,
+                    'message': '¡Tu comentario ha sido publicado exitosamente!',
+                    'comentario': {
+                        'contenido': comentario.contenido,
+                        'fecha_creacion': comentario.fecha_creacion.strftime('%d/%m/%Y %H:%M'),
+                        'usuario': comentario.usuario.username
+                    }
+                })
+                
             messages.success(request, '¡Tu comentario ha sido publicado exitosamente!')
-            return redirect('index')  # Asegúrate de que 'index' sea el nombre de la URL de tu página principal
+            return redirect('index')
+        else:
+            # Si es AJAX y el formulario no es válido, devolver errores
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({
+                    'success': False,
+                    'errors': form.errors,
+                    'message': 'Por favor, corrige los errores en el formulario.'
+                }, status=400)
     else:
         form = ComentarioForm()
     
-    return render(request, 'comentarios/agregar_comentario.html', {'form': form})
+    # Si no es AJAX, renderizar la plantilla normal
+    if not request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return render(request, 'comentarios/agregar_comentario.html', {'form': form})
+    
+    # Si es AJAX pero no es POST, devolver error
+    return JsonResponse({
+        'success': False,
+        'message': 'Método no permitido.'
+    }, status=405)
 
 @login_required
 def eliminar_comentario(request, comentario_id):

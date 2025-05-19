@@ -55,7 +55,7 @@
                         </a>
                         <form action="{% url 'logout' %}" method="post" class="d-inline">
                             {% csrf_token %}
-                            <button type="submit" class="register_btn" style="background: none; border: none; color: inherit; cursor: pointer; font: inherit; padding: 0; margin: 0;">
+                            <button type="submit" class="login_btn" style="background: none; border: 2px solid #00FFCE; color: #00FFCE; cursor: pointer; font: inherit; padding: 6px; border-radius: 12px; font-weight: 600; transition: all 300ms ease-in-out; display: inline-flex; align-items: center; gap: 5px;">
                                 <i class="fas fa-sign-out-alt"></i> <span class="lang-es">Cerrar sesión</span><span class="lang-en">Logout</span>
                             </button>
                         </form>

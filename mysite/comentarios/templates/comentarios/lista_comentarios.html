@@ -6,15 +6,35 @@
         </h2>
         
         {% if user.is_authenticated %}
-        <div class="text-center">
-            <a href="{% url 'comentarios:agregar_comentario' %}" class="add-comment-btn">
-                <i class="fas fa-plus"></i>
-                <span class="lang-es">Nuevo Comentario</span>
-                <span class="lang-en" style="display: none;">New Comment</span>
-            </a>
+        <div class="comment-form-container" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
+            <h4 style="color: #00FFCE; margin-bottom: 1rem;">
+                <i class="fas fa-comment-alt" style="margin-right: 8px;"></i>
+                <span class="lang-es">Deja tu comentario</span>
+                <span class="lang-en" style="display: none;">Leave your comment</span>
+            </h4>
+            <form id="commentForm" method="post" action="{% url 'comentarios:agregar_comentario' %}" class="needs-validation" novalidate>
+                {% csrf_token %}
+                <div style="margin-bottom: 1rem;">
+                    <textarea 
+                        name="contenido" 
+                        class="form-control" 
+                        required 
+                        id="id_contenido" 
+                        style="width: 100%; min-height: 100px; padding: 12px; border: 1px solid #2a2a2a; border-radius: 4px; background-color: #1e1e1e; color: #ffffff; resize: vertical;"
+                        placeholder="{% if lang == 'en' %}Write your comment here...{% else %}Escribe tu comentario aquí...{% endif %}"
+                    ></textarea>
+                </div>
+                <div style="display: flex; justify-content: flex-end;">
+                    <button type="submit" class="btn-submit" style="background: #00FFCE; color: #000; border: none; padding: 8px 20px; border-radius: 4px; font-weight: 600; cursor: pointer; display: flex; align-items: center;">
+                        <i class="fas fa-paper-plane" style="margin-right: 8px;"></i>
+                        <span class="lang-es">Publicar</span>
+                        <span class="lang-en" style="display: none;">Post</span>
+                    </button>
+                </div>
+            </form>
         </div>
         {% else %}
-        <div class="alert alert-info text-center" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1.5rem; margin-bottom: 3rem; color: #ffffff !important;">
+        <div class="alert alert-info text-center" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem; color: #ffffff !important;">
             <span class="lang-es">
                 <a href="{% url 'login' %}?next={{ request.path }}" style="color: #00ffcc !important; text-decoration: none; font-weight: 500;">
                     Inicia sesión
@@ -76,4 +96,87 @@
             {% endif %}
         </div>
     </div>
+    
+    <script>
+    // Validación y envío del formulario de comentarios
+    document.addEventListener('DOMContentLoaded', function() {
+        const commentForm = document.getElementById('commentForm');
+        
+        if (commentForm) {
+            commentForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                if (!commentForm.checkValidity()) {
+                    event.stopPropagation();
+                    commentForm.classList.add('was-validated');
+                    return;
+                }
+                
+                const formData = new FormData(commentForm);
+                const submitButton = commentForm.querySelector('button[type="submit"]');
+                const originalButtonText = submitButton.innerHTML;
+                
+                // Cambiar el texto del botón y deshabilitarlo
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span class="lang-es">Publicando...</span><span class="lang-en" style="display:none;">Posting...</span>';
+                
+                // Enviar el formulario vía AJAX
+                fetch(commentForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    },
+                    credentials: 'same-origin'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Mostrar mensaje de éxito
+                        const successMessage = document.createElement('div');
+                        successMessage.className = 'alert alert-success';
+                        successMessage.style.marginTop = '1rem';
+                        successMessage.style.padding = '0.75rem 1.25rem';
+                        successMessage.style.borderRadius = '0.25rem';
+                        successMessage.style.backgroundColor = 'rgba(0, 255, 128, 0.1)';
+                        successMessage.style.border = '1px solid rgba(0, 255, 128, 0.2)';
+                        successMessage.style.color = '#00ff80';
+                        
+                        const successIcon = document.createElement('i');
+                        successIcon.className = 'fas fa-check-circle';
+                        successIcon.style.marginRight = '8px';
+                        
+                        successMessage.appendChild(successIcon);
+                        successMessage.appendChild(document.createTextNode(' ' + data.message));
+                        
+                        // Insertar el mensaje después del formulario
+                        commentForm.parentNode.insertBefore(successMessage, commentForm.nextSibling);
+                        
+                        // Limpiar el formulario
+                        commentForm.reset();
+                        commentForm.classList.remove('was-validated');
+                        
+                        // Recargar la página después de 1.5 segundos
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1500);
+                    } else {
+                        // Mostrar mensaje de error
+                        alert(data.message || 'Error al publicar el comentario. Por favor, inténtalo de nuevo.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al publicar el comentario. Por favor, inténtalo de nuevo.');
+                })
+                .finally(() => {
+                    // Restaurar el botón
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalButtonText;
+                });
+            });
+        }
+    });
+    </script>
 </section>
