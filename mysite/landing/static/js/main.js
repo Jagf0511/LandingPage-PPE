@@ -3,6 +3,22 @@ const abrir = document.querySelector(".abrir");
 const cerrar = document.querySelector(".cerrar");
 const list = document.querySelector(".list-nav");
 
+// Inicialización de LogRocket para monitoreo de sesiones y errores
+if (window.LogRocket) {
+    window.LogRocket.init('l2tomk/landing-page');
+
+    // Registrar un evento personalizado
+    window.LogRocket.log('Página principal cargada');
+
+    // Registrar un error personalizado de ejemplo
+    try {
+        // Simulación de código que podría fallar
+        // throw new Error('Error de ejemplo para LogRocket');
+    } catch (e) {
+        window.LogRocket.error('Error capturado: ' + e.message);
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     const nav = document.querySelector(".navigation");
     const logo = document.querySelector(".logo");

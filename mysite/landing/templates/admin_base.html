@@ -22,6 +22,8 @@
             display: inline-block;
         }
     </style>
+    <script src="https://cdn.lr-in-prod.com/LogRocket.min.js" crossorigin="anonymous"></script>
+    <script>window.LogRocket && window.LogRocket.init('l2tomk/landing-page');</script>
 </head>
 
 <body>
@@ -153,6 +155,15 @@
             }
         });
     </script>
+
+    {% if user.is_authenticated %}
+    <script>
+        window.LogRocket && window.LogRocket.identify('{{ user.id }}', {
+            name: '{{ user.get_full_name|escapejs }}',
+            email: '{{ user.email|escapejs }}'
+        });
+    </script>
+    {% endif %}
 </body>
 
 </html>
