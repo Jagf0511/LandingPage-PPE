@@ -11,7 +11,13 @@ from .decorators import superuser_required, admin_required, normal_user_required
 import requests
 
 def index(request):
-    return render(request, 'index.html')
+    from comentarios.models import Comentario
+    comentarios = Comentario.objects.filter(activo=True).order_by('-fecha_creacion')
+    context = {
+        'comentarios': comentarios,
+        'user': request.user  # Asegurarse de que el usuario esté en el contexto
+    }
+    return render(request, 'index.html', context)
 
 def register(request):
     if request.method == 'POST':

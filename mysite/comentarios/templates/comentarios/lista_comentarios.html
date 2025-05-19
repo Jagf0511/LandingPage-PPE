@@ -1,0 +1,79 @@
+<section class="comments-section">
+    <div class="container">
+        <h2 class="text-center mb-5" style="color: #ffffff !important;">
+            <span class="lang-es">Comentarios de Nuestros Clientes</span>
+            <span class="lang-en" style="display: none; color: #ffffff !important;">Customer Reviews</span>
+        </h2>
+        
+        {% if user.is_authenticated %}
+        <div class="text-center">
+            <a href="{% url 'comentarios:agregar_comentario' %}" class="add-comment-btn">
+                <i class="fas fa-plus"></i>
+                <span class="lang-es">Nuevo Comentario</span>
+                <span class="lang-en" style="display: none;">New Comment</span>
+            </a>
+        </div>
+        {% else %}
+        <div class="alert alert-info text-center" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1.5rem; margin-bottom: 3rem; color: #ffffff !important;">
+            <span class="lang-es">
+                <a href="{% url 'login' %}?next={{ request.path }}" style="color: #00ffcc !important; text-decoration: none; font-weight: 500;">
+                    Inicia sesión
+                </a> <span style="color: #ffffff;">para dejar un comentario.</span>
+            </span>
+            <span class="lang-en" style="display: none; color: #ffffff !important;">
+                <a href="{% url 'login' %}?next={{ request.path }}" style="color: #00ffcc !important; text-decoration: none; font-weight: 500;">
+                    Log in
+                </a> <span style="color: #ffffff;">to leave a comment.</span>
+            </span>
+        </div>
+        {% endif %}
+
+        <div class="comments-container">
+            {% if comentarios %}
+                {% for comentario in comentarios %}
+                <div class="comment-card">
+                    <div class="comment-header">
+                        <div class="comment-user">
+                            <div class="comment-avatar">
+                                {{ comentario.usuario.first_name|first|default:comentario.usuario.username|first|upper }}
+                            </div>
+                            <div class="comment-user-info">
+                                <h5>{{ comentario.usuario.get_full_name|default:comentario.usuario.username }}</h5>
+                                <div class="comment-time">
+                                    <i class="far fa-clock"></i>
+                                    <span>{{ comentario.fecha_creacion|date:"d M Y" }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-content">
+                        {{ comentario.contenido|linebreaksbr }}
+                    </div>
+                    
+                    {% if user == comentario.usuario or user.is_superuser %}
+                    <div class="comment-actions">
+                        <form action="{% url 'comentarios:eliminar_comentario' comentario.id %}" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn" 
+                                    onclick="return confirm('¿Estás seguro de que quieres eliminar este comentario?')">
+                                <i class="fas fa-trash-alt"></i>
+                                <span class="lang-es">Eliminar</span>
+                                <span class="lang-en" style="display: none;">Delete</span>
+                            </button>
+                        </form>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-comments">
+                    <i class="far fa-comment-dots"></i>
+                    <h4 class="lang-es">No hay comentarios aún</h4>
+                    <h4 class="lang-en" style="display: none;">No comments yet</h4>
+                    <p class="lang-es">Sé el primero en compartir tu experiencia con nosotros.</p>
+                    <p class="lang-en" style="display: none;">Be the first to share your experience with us.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>

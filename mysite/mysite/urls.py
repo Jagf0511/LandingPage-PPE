@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', include('landing.urls')),
     path('admin/', admin.site.urls),
+    path('comentarios/', include('comentarios.urls')),
 ]
 
 # Añadir URLs para servir archivos multimedia durante el desarrollo
