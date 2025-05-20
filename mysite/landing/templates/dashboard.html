@@ -118,23 +118,29 @@
                         </td>
                         <td>
                             {% if is_admin %}
-                            <!-- Botón para editar -->                            <a href="{% url 'editar_elemento' elemento.id %}" class="btn btn-warning btn-sm">
+                            <!-- Botón para editar -->
+                            <a href="{% url 'editar_elemento' elemento.id %}" 
+                               id="btn-editar-{{ elemento.id }}" 
+                               class="btn btn-warning btn-sm me-2 btn-editar"
+                               data-elemento-id="{{ elemento.id }}"
+                               title="Editar elemento {{ elemento.id }}">
                                 ✏️ Editar
                             </a>
                             
                             <!-- Formulario para eliminar -->
-                            <form method="POST" action="{% url 'eliminar_elemento' elemento.id %}" style="display:inline;">
+                            <form id="form-eliminar-{{ elemento.id }}" method="POST" action="{% url 'eliminar_elemento' elemento.id %}" style="display:inline;">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este elemento?')">
+                                <button type="submit" 
+                                        id="btn-eliminar-{{ elemento.id }}" 
+                                        class="btn btn-danger btn-sm btn-eliminar" 
+                                        data-elemento-id="{{ elemento.id }}"
+                                        onclick="return confirm('¿Estás seguro de que deseas eliminar este elemento?')">
                                     ❌ Eliminar
                                 </button>
                             </form>
                             {% else %}
                             <span class="text-muted">Solo vista</span>
                             {% endif %}
-                                 
-                                </button>
-                            </form>
                         </td>
                     </tr>
                     {% empty %}
